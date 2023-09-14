@@ -12,13 +12,13 @@ export async function sessionHooks({ event }: { event: EventHandler }) {
 	};
 
 	event.request.getSessionItem = (itemKey: string) => {
-		const item = event.cookies.get(`kinde_${itemKey}` ) || ''
+		const item = event.cookies.get(`kinde_${itemKey}`) || '';
 		if (/state/.test(itemKey)) {
 			return item; // return raw state
 		}
 		try {
 			const result = JSON.parse(item);
-			return result
+			return result;
 		} catch (error) {
 			return event.cookies.get(`kinde_${itemKey}`);
 		}
@@ -33,7 +33,7 @@ export async function sessionHooks({ event }: { event: EventHandler }) {
 	event.request.destroySession = async () => {
 		event.cookies.getAll().forEach((item) => {
 			if (/^kinde_/.test(item.name)) {
-				event.cookies.delete(item.name);
+				event.cookies.delete(item.name, { path: '/' });
 			}
 		});
 		return;
