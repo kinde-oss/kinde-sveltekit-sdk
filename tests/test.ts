@@ -12,9 +12,7 @@ const USER_PASSWORD = process.env.KINDE_USER_PASSWORD_TEST || ""
 test('Authentication Login', async ({ page }) => {
 	await page.goto('api/auth/login');
 
-	await expect(async () => {
-		expect(page.url()).toContain(`${HOST}/auth/cx/_:nav&m:login`);
-	}).toPass();
+	await page.waitForURL(new RegExp(`${HOST}/auth/cx/_:nav&m:login`))
 
 	await page.getByLabel('Email').fill(USER_EMAIL);
 	await page.getByText('Log in').click();
@@ -32,17 +30,23 @@ test('Authentication Login', async ({ page }) => {
 test('Should redirect to registration page', async ({ page }) => {
 	await page.goto('api/auth/register');
 
-	await expect(async () => {
-		expect(page.url()).toContain(`${HOST}/auth/cx/_:nav&m:register`);
-	}).toPass();
+	await page.waitForURL(new RegExp(`${HOST}/auth/cx/_:nav&m:register`))
+
+	await expect(page.locator('[name=p_first_name]')).toBeVisible()
+
+	await expect(page.locator('[name=p_last_name]')).toBeVisible()
+
+	await expect(page.locator('[name=p_email]')).toBeVisible()
 });
 
 test('Should redirect to create org page', async ({ page }) => {
 	await page.goto('api/auth/create_org');
 
-	await expect(async () => {
-		expect(page.url()).toContain(`${HOST}/auth/cx/_:nav&m:register`);
-	}).toPass();
+	await expect(page.locator('[name=p_first_name]')).toBeVisible()
+
+	await expect(page.locator('[name=p_last_name]')).toBeVisible()
+
+	await expect(page.locator('[name=p_email]')).toBeVisible()
 });
 
 test('Should redirect to logout page', async ({ page }) => {
