@@ -7,7 +7,7 @@ const { createKindeServerClient, GrantType, } = pkg;
 
 export const kindeAuthClient = createKindeServerClient<ACClient, PKCEClientOptions>(
 	GrantType.PKCE,
-	omit(kindeConfiguration, ['clientSecret']) as unknown as PKCEClientOptions
+	kindeConfiguration as unknown as PKCEClientOptions
 );
 
 export const getHeaders = async () => {
