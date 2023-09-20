@@ -1,1 +1,1 @@
-export * from './Handler.js'
+export * from './handler.js'
