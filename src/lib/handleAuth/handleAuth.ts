@@ -1,9 +1,9 @@
-import { kindeAuthClient } from '$lib/KindeSDK.js';
-import { kindeConfiguration } from '$lib/index.js';
-import type { SessionManager } from '@kinde-oss/kinde-typescript-sdk';
-import { error, redirect, type RequestEvent } from '@sveltejs/kit';
+import {kindeAuthClient} from '$lib/KindeSDK.js';
+import {kindeConfiguration} from '$lib/index.js';
+import type {SessionManager} from '@kinde-oss/kinde-typescript-sdk';
+import {error, redirect, type RequestEvent} from '@sveltejs/kit';
 
-export async function handleAuth({ request, params }: RequestEvent): Promise<Response> {
+export async function handleAuth({request, params}: RequestEvent): Promise<Response> {
 	let url: URL | null = null;
 	switch (params.kindeAuth) {
 		case 'login':
@@ -22,7 +22,7 @@ export async function handleAuth({ request, params }: RequestEvent): Promise<Res
 			);
 			throw redirect(302, kindeConfiguration.loginRedirectURL ?? '/');
 		case 'logout':
-			url = kindeAuthClient.logout(request as unknown as SessionManager);
+			url = await kindeAuthClient.logout(request as unknown as SessionManager);
 			break;
 		default:
 			throw error(404, 'Not Found');
