@@ -8,7 +8,8 @@ import {
 	KINDE_POST_LOGIN_REDIRECT_URL,
 	KINDE_POST_LOGOUT_REDIRECT_URL,
 	KINDE_REDIRECT_URL,
-	KINDE_SCOPE
+	KINDE_SCOPE,
+	KINDE_AUTH_WITH_PKCE
 } from '$env/static/private';
 
 export const kindeConfiguration = {
@@ -19,5 +20,6 @@ export const kindeConfiguration = {
 	audience: KINDE_AUDIENCE,
 	scope: KINDE_SCOPE,
 	clientSecret: KINDE_CLIENT_SECRET,
-	loginRedirectURL: KINDE_POST_LOGIN_REDIRECT_URL
+	loginRedirectURL: KINDE_POST_LOGIN_REDIRECT_URL,
+	authUsePKCE: [true, 'true'].includes(KINDE_AUTH_WITH_PKCE)
 };

@@ -1,22 +1,36 @@
-import { kindeConfiguration } from '$lib/config/index.js';
-import { sessionStorage } from '$lib/sessionStorage/index.js';
+import {kindeConfiguration} from '$lib/config/index.js';
+import {sessionStorage} from '$lib/sessionStorage/index.js';
 
-import pkg, { type ACClient, type CCClient, type CCClientOptions, type PKCEClientOptions } from '@kinde-oss/kinde-typescript-sdk';
-import { omit } from './utils/index.js';
-const { createKindeServerClient, GrantType, } = pkg;
+import {
+	GrantType,
+	createKindeServerClient,
+	type CCClientOptions,
+	type SessionManager,
+	type PKCEClientOptions,
+	type ACClientOptions
+} from '@kinde-oss/kinde-typescript-sdk';
+import {omit} from './utils/index.js';
 
-export const kindeAuthClient = createKindeServerClient<ACClient, PKCEClientOptions>(
-	GrantType.PKCE,
-	kindeConfiguration as unknown as PKCEClientOptions
+export const kindeAuthClient = createKindeServerClient(
+	kindeConfiguration.authUsePKCE ? GrantType.PKCE : GrantType.AUTHORIZATION_CODE,
+	omit(
+		kindeConfiguration,
+		kindeConfiguration.authUsePKCE ? ['authUsePKCE', 'clientSecret'] : ['authUsePKCE']
+	) as unknown as PKCEClientOptions | ACClientOptions
 );
 
 export const getHeaders = async () => {
-	const kindeManagementApi = createKindeServerClient<CCClient, CCClientOptions>(
+	const kindeManagementApi = createKindeServerClient(
 		GrantType.CLIENT_CREDENTIALS,
-		omit(kindeConfiguration, ['logoutRedirectURL', 'loginRedirectURL', 'scope', 'redirectURL']) as unknown as CCClientOptions
+		omit(kindeConfiguration, [
+			'logoutRedirectURL',
+			'loginRedirectURL',
+			'scope',
+			'redirectURL'
+		]) as unknown as CCClientOptions
 	);
 
-	const token = await kindeManagementApi.getToken(sessionStorage);
+	const token = await kindeManagementApi.getToken(sessionStorage as unknown as SessionManager);
 
 	return {
 		Authorization: `Bearer ${token}`,

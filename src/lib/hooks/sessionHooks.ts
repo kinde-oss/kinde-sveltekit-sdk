@@ -1,7 +1,7 @@
-import type { EventHandler } from '$lib/types/handler.js';
+import type {EventHandler} from '$lib/types/handler.js';
 
-export async function sessionHooks({ event }: { event: EventHandler }) {
-	event.request.setSessionItem = (itemKey: string, itemValue: unknown) => {
+export async function sessionHooks({event}: {event: EventHandler}) {
+	event.request.setSessionItem = async (itemKey: string, itemValue: unknown) => {
 		event.cookies.set(
 			`kinde_${itemKey}`,
 			typeof itemValue === 'string' ? itemValue : (JSON.stringify(itemValue) as string),
@@ -24,7 +24,7 @@ export async function sessionHooks({ event }: { event: EventHandler }) {
 		}
 	};
 
-	event.request.removeSessionItem = (itemKey: string) => {
+	event.request.removeSessionItem = async (itemKey: string) => {
 		return event.cookies.delete(`kinde_${itemKey}`, {
 			path: '/'
 		});
@@ -33,7 +33,7 @@ export async function sessionHooks({ event }: { event: EventHandler }) {
 	event.request.destroySession = async () => {
 		event.cookies.getAll().forEach((item) => {
 			if (/^kinde_/.test(item.name)) {
-				event.cookies.delete(item.name, { path: '/' });
+				event.cookies.delete(item.name, {path: '/'});
 			}
 		});
 		return;
