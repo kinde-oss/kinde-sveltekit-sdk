@@ -1,19 +1,25 @@
 import {kindeAuthClient} from '$lib/KindeSDK.js';
 import {kindeConfiguration} from '$lib/index.js';
+import {parseSearchParamsToObject} from '$lib/utils/index.js';
 import type {SessionManager} from '@kinde-oss/kinde-typescript-sdk';
 import {error, redirect, type RequestEvent} from '@sveltejs/kit';
 
-export async function handleAuth({request, params}: RequestEvent): Promise<Response> {
+export async function handleAuth({
+	request,
+	params,
+	url: originURL
+}: RequestEvent): Promise<Response> {
+	const options = parseSearchParamsToObject(originURL.search);
 	let url: URL | null = null;
 	switch (params.kindeAuth) {
 		case 'login':
-			url = await kindeAuthClient.login(request as unknown as SessionManager);
+			url = await kindeAuthClient.login(request as unknown as SessionManager, options);
 			break;
 		case 'register':
-			url = await kindeAuthClient.register(request as unknown as SessionManager);
+			url = await kindeAuthClient.register(request as unknown as SessionManager, options);
 			break;
 		case 'create_org':
-			url = await kindeAuthClient.createOrg(request as unknown as SessionManager);
+			url = await kindeAuthClient.createOrg(request as unknown as SessionManager, options);
 			break;
 		case 'kinde_callback':
 			await kindeAuthClient.handleRedirectToApp(

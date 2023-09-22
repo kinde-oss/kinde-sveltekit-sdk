@@ -82,6 +82,7 @@ KINDE_REDIRECT_URL=http://localhost:4173/api/auth/kinde_callback
 KINDE_SCOPE=profile email offline openid
 KINDE_USER_EMAIL_TEST= // An user has existed in your organization
 KINDE_USER_PASSWORD_TEST=
+KINDE_AUTH_WITH_PKCE= // Set `true` if you want to use Authentication Code Flow with PKCE
 ```
 
 Finally, you can simply run the command
