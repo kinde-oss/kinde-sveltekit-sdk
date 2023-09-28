@@ -7,7 +7,9 @@ import {
 	type CCClientOptions,
 	type SessionManager,
 	type PKCEClientOptions,
-	type ACClientOptions
+	type ACClientOptions,
+	Configuration,
+	type ConfigurationParameters
 } from '@kinde-oss/kinde-typescript-sdk';
 import {omit} from './utils/index.js';
 
@@ -36,4 +38,28 @@ export const getHeaders = async () => {
 		Authorization: `Bearer ${token}`,
 		Accept: 'application/json'
 	};
+};
+
+export const getConfiguration = async (configurationOverrides?: ConfigurationParameters) => {
+	const kindeManagementApi = createKindeServerClient(
+		GrantType.CLIENT_CREDENTIALS,
+		omit(kindeConfiguration, [
+			'logoutRedirectURL',
+			'loginRedirectURL',
+			'scope',
+			'redirectURL'
+		]) as unknown as CCClientOptions
+	);
+
+	const token = await kindeManagementApi.getToken(sessionStorage as unknown as SessionManager);
+
+	const config = new Configuration({
+		basePath: kindeConfiguration.authDomain,
+		accessToken: token,
+		headers: {
+			Accept: 'application/json'
+		},
+		...(configurationOverrides || {})
+	});
+	return config;
 };
