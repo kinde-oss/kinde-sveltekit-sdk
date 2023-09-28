@@ -24,6 +24,7 @@ test('Authentication Login', async ({page}) => {
 		})
 		.click();
 
+	await page.waitForTimeout(3000);
 	await expect(async () => {
 		expect(page.url()).toContain(LOGIN_REDIRECT_URL);
 	}).toPass();
