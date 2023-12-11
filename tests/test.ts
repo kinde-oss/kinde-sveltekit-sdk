@@ -15,7 +15,7 @@ test('Authentication Login', async ({page}) => {
 	await page.waitForURL(new RegExp(`${HOST}/auth/cx/_:nav&m:login`));
 
 	await page.getByLabel('Email').fill(USER_EMAIL);
-	await page.getByText('Log in').click();
+	await page.getByText('Continue').click();
 	await page.waitForTimeout(3000);
 	await page.locator('#input_field_p_password_password').fill(USER_PASSWORD);
 	await page
