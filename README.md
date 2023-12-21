@@ -2,7 +2,7 @@
 
 The Kinde SDK for SvelteKit.
 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com) [![Kinde Docs](https://img.shields.io/badge/Kinde-Docs-eee?style=flat-square)](https://kinde.com/docs/developer-tools) [![Kinde Community](https://img.shields.io/badge/Kinde-Community-eee?style=flat-square)](https://thekindecommunity.slack.com)
+[![PRs - Welcome](https://img.shields.io/badge/PRs-Welcome-green?style=for-the-badge)](https://kinde.com/docs/developer-tools) [![Kinde - Docs](https://img.shields.io/badge/Kinde-Docs-white?style=for-the-badge)](https://kinde.com/docs/developer-tools) [![Kinde Community](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)](https://join.slack.com/t/thekindecommunity/shared_invite/zt-26hdaavyc-CfOa06vP23guSwK~~OpFMQ) [![Discord](https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/wHX6j7wG5d)
 
 ## Development
 
