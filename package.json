@@ -1,6 +1,6 @@
 {
 	"name": "@kinde-oss/kinde-auth-sveltekit",
-	"version": "1.2.1",
+	"version": "1.2.2",
 	"description": "Kinde SvelteKit SDK",
 	"scripts": {
 		"dev": "vite dev",
@@ -40,7 +40,7 @@
 		"!dist/**/*.spec.*"
 	],
 	"peerDependencies": {
-		"@sveltejs/kit": "^1.20.4",
+		"@sveltejs/kit": "^1.20.4 || ^2.0.0",
 		"svelte": "^4.0.0"
 	},
 	"dependencies": {
