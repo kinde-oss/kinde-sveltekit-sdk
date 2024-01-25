@@ -1,4 +1,4 @@
-import {kindeConfiguration} from '$lib/config/index.js';
+import {kindeConfiguration, kindeAPIConfiguration} from '$lib/config/index.js';
 import {sessionStorage} from '$lib/sessionStorage/index.js';
 
 import {
@@ -24,12 +24,7 @@ export const kindeAuthClient = createKindeServerClient(
 export const getHeaders = async () => {
 	const kindeManagementApi = createKindeServerClient(
 		GrantType.CLIENT_CREDENTIALS,
-		omit(kindeConfiguration, [
-			'logoutRedirectURL',
-			'loginRedirectURL',
-			'scope',
-			'redirectURL'
-		]) as unknown as CCClientOptions
+		kindeAPIConfiguration as unknown as CCClientOptions
 	);
 
 	const token = await kindeManagementApi.getToken(sessionStorage as unknown as SessionManager);
@@ -43,12 +38,7 @@ export const getHeaders = async () => {
 export const getConfiguration = async (configurationOverrides?: ConfigurationParameters) => {
 	const kindeManagementApi = createKindeServerClient(
 		GrantType.CLIENT_CREDENTIALS,
-		omit(kindeConfiguration, [
-			'logoutRedirectURL',
-			'loginRedirectURL',
-			'scope',
-			'redirectURL'
-		]) as unknown as CCClientOptions
+		kindeAPIConfiguration as unknown as CCClientOptions
 	);
 
 	const token = await kindeManagementApi.getToken(sessionStorage as unknown as SessionManager);
