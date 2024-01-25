@@ -12,7 +12,12 @@ export async function sessionHooks({event}: {event: EventHandler}) {
 	};
 
 	event.request.getSessionItem = (itemKey: string) => {
-		const item = event.cookies.get(`kinde_${itemKey}`) || '';
+		const item = event.cookies.get(`kinde_${itemKey}`);
+
+		if (!item) {
+			return item;
+		}
+
 		if (/state/.test(itemKey)) {
 			return item; // return raw state
 		}
