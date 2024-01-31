@@ -1,8 +1,11 @@
 import {kindeAuthClient} from '$lib/KindeSDK.js';
 import {kindeConfiguration} from '$lib/index.js';
+import {sessionStorage} from '$lib/sessionStorage/sessionStorage.js';
 import {parseSearchParamsToObject} from '$lib/utils/index.js';
 import type {SessionManager} from '@kinde-oss/kinde-typescript-sdk';
 import {error, redirect, type RequestEvent} from '@sveltejs/kit';
+
+const KEY_POST_LOGIN_URL = 'post-login-url';
 
 export async function handleAuth({
 	request,
@@ -13,6 +16,9 @@ export async function handleAuth({
 	let url: URL | null = null;
 	switch (params.kindeAuth) {
 		case 'login':
+			if (options.post_login_redirect_url && typeof options.post_login_redirect_url == 'string') {
+				sessionStorage.setSessionItem(KEY_POST_LOGIN_URL, options.post_login_redirect_url);
+			}
 			url = await kindeAuthClient.login(request as unknown as SessionManager, options);
 			break;
 		case 'register':
@@ -26,6 +32,11 @@ export async function handleAuth({
 				request as unknown as SessionManager,
 				new URL(request.url)
 			);
+			if (sessionStorage.getSessionItem(KEY_POST_LOGIN_URL)) {
+				const post_login_url = sessionStorage.getSessionItem(KEY_POST_LOGIN_URL);
+				sessionStorage.removeSessionItem(KEY_POST_LOGIN_URL);
+				throw redirect(302, kindeConfiguration.appBase + post_login_url);
+			}
 			throw redirect(302, kindeConfiguration.loginRedirectURL ?? '/');
 		case 'logout':
 			url = await kindeAuthClient.logout(request as unknown as SessionManager);
