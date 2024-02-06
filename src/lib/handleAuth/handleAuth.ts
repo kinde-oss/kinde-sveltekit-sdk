@@ -52,6 +52,6 @@ const redirectToPostUrl = () => {
 	if (sessionStorage.getSessionItem(KEY_POST_REDIRECT_URL)) {
 		const post_redirect_url = sessionStorage.getSessionItem(KEY_POST_REDIRECT_URL);
 		sessionStorage.removeSessionItem(KEY_POST_REDIRECT_URL);
-		throw redirect(302, kindeConfiguration.appBase + post_redirect_url);
+		throw redirect(302, new URL(post_redirect_url, kindeConfiguration.appBase));
 	}
 };
