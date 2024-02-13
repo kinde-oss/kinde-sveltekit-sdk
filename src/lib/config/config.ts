@@ -1,6 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import {env} from '$env/dynamic/private';
+import {version} from '$app/environment';
 
 export const kindeConfiguration = {
 	authDomain: env.KINDE_ISSUER_URL,
@@ -17,5 +18,7 @@ export const kindeConfiguration = {
 export const kindeAPIConfiguration = {
 	audience: `${env.KINDE_ISSUER_URL}/api`,
 	clientId: env.KINDE_CLIENT_ID,
-	clientSecret: env.KINDE_CLIENT_SECRET
+	clientSecret: env.KINDE_CLIENT_SECRET,
+	framework: 'Sveltekit',
+	frameworkVersion: version
 };
