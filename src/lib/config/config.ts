@@ -12,7 +12,8 @@ export const kindeConfiguration = {
 	scope: env.KINDE_SCOPE,
 	clientSecret: env.KINDE_CLIENT_SECRET,
 	loginRedirectURL: env.KINDE_POST_LOGIN_REDIRECT_URL,
-	authUsePKCE: [true, 'true'].includes(env.KINDE_AUTH_WITH_PKCE)
+	authUsePKCE: [true, 'true'].includes(env.KINDE_AUTH_WITH_PKCE),
+	debug: env.KINDE_DEBUG || process.env.NODE_ENV !== 'production'
 };
 
 export const kindeAPIConfiguration = {

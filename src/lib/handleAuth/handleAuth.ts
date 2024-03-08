@@ -3,6 +3,7 @@ import {kindeConfiguration} from '$lib/index.js';
 import {parseSearchParamsToObject} from '$lib/utils/index.js';
 import type {SessionManager} from '@kinde-oss/kinde-typescript-sdk';
 import {error, redirect, type RequestEvent} from '@sveltejs/kit';
+import {version} from '$app/environment';
 
 export async function handleAuth({
 	request,
@@ -15,6 +16,32 @@ export async function handleAuth({
 		case 'login':
 			url = await kindeAuthClient.login(request as unknown as SessionManager, options);
 			break;
+		case 'health':
+			if (!kindeConfiguration.debug) {
+				url = new URL(kindeConfiguration.loginRedirectURL);
+				break;
+			}
+			return new Response(
+				JSON.stringify({
+					authDomain: kindeConfiguration.authDomain || '',
+					clientId: kindeConfiguration.clientId || '',
+					logoutRedirectURL: kindeConfiguration.logoutRedirectURL || '',
+					redirectURL: kindeConfiguration.redirectURL || '',
+					audience: kindeConfiguration.audience || '',
+					scope: kindeConfiguration.scope || '',
+					clientSecret: kindeConfiguration.clientSecret.match('[a-z0-9]{32}')
+						? 'Set correctly'
+						: 'Not set correctly',
+					loginRedirectURL: kindeConfiguration.loginRedirectURL || '',
+					authUsePKCE: kindeConfiguration.authUsePKCE,
+					version: version,
+					framework: 'sveltekit'
+				}),
+				{
+					status: 200,
+					headers: {'Content-Type': 'application/json'}
+				}
+			);
 		case 'register':
 			url = await kindeAuthClient.register(request as unknown as SessionManager, options);
 			break;

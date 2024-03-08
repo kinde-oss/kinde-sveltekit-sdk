@@ -83,6 +83,7 @@ KINDE_SCOPE=profile email offline openid
 KINDE_USER_EMAIL_TEST= // An user has existed in your organization
 KINDE_USER_PASSWORD_TEST=
 KINDE_AUTH_WITH_PKCE= // Set `true` if you want to use Authentication Code Flow with PKCE
+KINDE_DEBUG= // Set `true` if you want to enable the `api/auth/health` endpoint
 ```
 
 Finally, you can simply run the command
