@@ -5,7 +5,7 @@ import {parseSearchParamsToObject} from '$lib/utils/index.js';
 import type {SessionManager} from '@kinde-oss/kinde-typescript-sdk';
 import {error, redirect, type RequestEvent} from '@sveltejs/kit';
 
-const KEY_POST_REDIRECT_URL = 'post-redirect-url';
+const KEY_POST_LOGIN_REDIRECT_URL = 'post-login-redirect-url';
 
 export async function handleAuth({
 	request,
@@ -16,11 +16,11 @@ export async function handleAuth({
 	let url: URL | null = null;
 	switch (params.kindeAuth) {
 		case 'login':
-			storePostRedirectUrl(options);
+			storePostLoginRedirectUrl(options);
 			url = await kindeAuthClient.login(request as unknown as SessionManager, options);
 			break;
 		case 'register':
-			storePostRedirectUrl(options);
+			storePostLoginRedirectUrl(options);
 			url = await kindeAuthClient.register(request as unknown as SessionManager, options);
 			break;
 		case 'create_org':
@@ -31,7 +31,7 @@ export async function handleAuth({
 				request as unknown as SessionManager,
 				new URL(request.url)
 			);
-			redirectToPostUrl();
+			redirectToPostLoginUrl();
 			throw redirect(302, kindeConfiguration.loginRedirectURL ?? '/');
 		case 'logout':
 			url = await kindeAuthClient.logout(request as unknown as SessionManager);
@@ -42,16 +42,16 @@ export async function handleAuth({
 	throw redirect(302, url.toString());
 }
 
-const storePostRedirectUrl = (options: Record<string, string | number>) => {
-	if (options.post_redirect_url && typeof options.post_redirect_url == 'string') {
-		sessionStorage.setSessionItem(KEY_POST_REDIRECT_URL, options.post_redirect_url);
+const storePostLoginRedirectUrl = (options: Record<string, string | number>) => {
+	if (options.post_login_redirect_url && typeof options.post_login_redirect_url == 'string') {
+		sessionStorage.setSessionItem(KEY_POST_LOGIN_REDIRECT_URL, options.post_login_redirect_url);
 	}
 };
 
-const redirectToPostUrl = () => {
-	if (sessionStorage.getSessionItem(KEY_POST_REDIRECT_URL)) {
-		const post_redirect_url = sessionStorage.getSessionItem(KEY_POST_REDIRECT_URL);
-		sessionStorage.removeSessionItem(KEY_POST_REDIRECT_URL);
-		throw redirect(302, new URL(post_redirect_url, kindeConfiguration.appBase));
+const redirectToPostLoginUrl = () => {
+	if (sessionStorage.getSessionItem(KEY_POST_LOGIN_REDIRECT_URL)) {
+		const post_login_redirect_url = sessionStorage.getSessionItem(KEY_POST_LOGIN_REDIRECT_URL);
+		sessionStorage.removeSessionItem(KEY_POST_LOGIN_REDIRECT_URL);
+		throw redirect(302, new URL(post_login_redirect_url, kindeConfiguration.appBase));
 	}
 };
