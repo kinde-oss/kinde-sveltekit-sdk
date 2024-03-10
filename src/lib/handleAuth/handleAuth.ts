@@ -75,10 +75,18 @@ const storePostLoginRedirectUrl = (options: Record<string, string | number>) => 
 	}
 };
 
+const isAbsoluteUrl = (url: string) =>
+	url.indexOf('http://') === 0 || url.indexOf('https://') === 0;
+
 const redirectToPostLoginUrl = () => {
 	if (sessionStorage.getSessionItem(KEY_POST_LOGIN_REDIRECT_URL)) {
 		const post_login_redirect_url = sessionStorage.getSessionItem(KEY_POST_LOGIN_REDIRECT_URL);
 		sessionStorage.removeSessionItem(KEY_POST_LOGIN_REDIRECT_URL);
-		throw redirect(302, new URL(post_login_redirect_url, kindeConfiguration.appBase));
+
+		if (isAbsoluteUrl(post_login_redirect_url)) {
+			throw redirect(302, new URL(post_login_redirect_url));
+		} else {
+			throw redirect(302, new URL(post_login_redirect_url, kindeConfiguration.appBase));
+		}
 	}
 };
