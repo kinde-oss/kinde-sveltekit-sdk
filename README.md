@@ -2,7 +2,7 @@
 
 The Kinde SDK for SvelteKit.
 
-[![PRs - Welcome](https://img.shields.io/badge/PRs-Welcome-green?style=for-the-badge)](https://kinde.com/docs/developer-tools) [![Kinde - Docs](https://img.shields.io/badge/Kinde-Docs-white?style=for-the-badge)](https://kinde.com/docs/developer-tools) [![Kinde Community](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)](https://join.slack.com/t/thekindecommunity/shared_invite/zt-26hdaavyc-CfOa06vP23guSwK~~OpFMQ) [![Discord](https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/wHX6j7wG5d)
+[![PRs - Welcome](https://img.shields.io/badge/PRs-Welcome-green?style=for-the-badge)](https://kinde.com/docs/developer-tools) [![Kinde - Docs](https://img.shields.io/badge/Kinde-Docs-white?style=for-the-badge)]([https://kinde.com/docs/developer-tools](https://kinde.com/docs/developer-tools/sveltekit-sdk/)) [![Kinde Community](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)](https://join.slack.com/t/thekindecommunity/shared_invite/zt-26hdaavyc-CfOa06vP23guSwK~~OpFMQ) [![Discord](https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/wHX6j7wG5d)
 
 ## Development
 
@@ -83,6 +83,7 @@ KINDE_SCOPE=profile email offline openid
 KINDE_USER_EMAIL_TEST= // An user has existed in your organization
 KINDE_USER_PASSWORD_TEST=
 KINDE_AUTH_WITH_PKCE= // Set `true` if you want to use Authentication Code Flow with PKCE
+KINDE_DEBUG= // Set `true` if you want to enable the `api/auth/health` endpoint
 ```
 
 Finally, you can simply run the command
