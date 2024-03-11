@@ -8,6 +8,7 @@ export const kindeConfiguration = {
 	clientId: env.KINDE_CLIENT_ID,
 	logoutRedirectURL: env.KINDE_POST_LOGOUT_REDIRECT_URL,
 	redirectURL: env.KINDE_REDIRECT_URL,
+	appBase: new URL(env.KINDE_REDIRECT_URL).origin,
 	audience: env.KINDE_AUDIENCE,
 	scope: env.KINDE_SCOPE,
 	clientSecret: env.KINDE_CLIENT_SECRET,
