@@ -44,7 +44,7 @@
 		"svelte": "^4.0.0"
 	},
 	"dependencies": {
-		"@kinde-oss/kinde-typescript-sdk": "^2.6.2"
+		"@kinde-oss/kinde-typescript-sdk": "^2.7.2"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",

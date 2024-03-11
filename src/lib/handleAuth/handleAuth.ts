@@ -1,7 +1,7 @@
 import {kindeAuthClient} from '$lib/KindeSDK.js';
 import {kindeConfiguration} from '$lib/index.js';
 import {parseSearchParamsToObject} from '$lib/utils/index.js';
-import type {SessionManager} from '@kinde-oss/kinde-typescript-sdk';
+import {type SessionManager, validateClientSecret} from '@kinde-oss/kinde-typescript-sdk';
 import {error, redirect, type RequestEvent} from '@sveltejs/kit';
 import {version} from '$app/environment';
 
@@ -29,7 +29,7 @@ export async function handleAuth({
 					redirectURL: kindeConfiguration.redirectURL || '',
 					audience: kindeConfiguration.audience || '',
 					scope: kindeConfiguration.scope || '',
-					clientSecret: kindeConfiguration.clientSecret.match('[a-z0-9]{32}')
+					clientSecret: validateClientSecret(kindeConfiguration.clientSecret || '')
 						? 'Set correctly'
 						: 'Not set correctly',
 					loginRedirectURL: kindeConfiguration.loginRedirectURL || '',
