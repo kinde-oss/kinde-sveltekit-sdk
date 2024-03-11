@@ -6,7 +6,10 @@ export async function sessionHooks({event}: {event: EventHandler}) {
 			`kinde_${itemKey}`,
 			typeof itemValue === 'string' ? itemValue : (JSON.stringify(itemValue) as string),
 			{
-				path: '/'
+				path: '/',
+				secure: true,
+				sameSite: 'lax',
+				httpOnly: true
 			}
 		);
 	};
