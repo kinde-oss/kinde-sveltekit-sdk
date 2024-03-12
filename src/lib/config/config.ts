@@ -3,12 +3,21 @@
 import {env} from '$env/dynamic/private';
 import {version} from '$app/environment';
 
+//write a method to handle if the KINDE_REDIRECT_URL is not a valid url new URL(env.KINDE_REDIRECT_URL).origin
+function getBaseURL() {
+	try {
+		return new URL(env.KINDE_REDIRECT_URL).origin;
+	} catch (error) {
+		return '';
+	}
+}
+
 export const kindeConfiguration = {
 	authDomain: env.KINDE_ISSUER_URL,
 	clientId: env.KINDE_CLIENT_ID,
 	logoutRedirectURL: env.KINDE_POST_LOGOUT_REDIRECT_URL,
 	redirectURL: env.KINDE_REDIRECT_URL,
-	appBase: new URL(env.KINDE_REDIRECT_URL).origin,
+	appBase: getBaseURL(),
 	audience: env.KINDE_AUDIENCE,
 	scope: env.KINDE_SCOPE,
 	clientSecret: env.KINDE_CLIENT_SECRET,
