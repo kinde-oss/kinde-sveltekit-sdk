@@ -40,7 +40,7 @@ npm run build
 
    ```bash
    npm pack <path-to-sdk-folder>
-   // e.g
+   // e.g.
    npm pack ~/Documents/Projects/kinde-sveltekit-sdk
    ```
 
