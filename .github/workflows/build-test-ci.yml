@@ -4,7 +4,7 @@
 #
 # https://pnpm.io/next/continuous-integration#github-actions
 
-name: Build and test TypeScript SDK CI
+name: Build and test
 
 on:
   push:

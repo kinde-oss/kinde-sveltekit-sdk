@@ -3,11 +3,11 @@
 import {env} from '$env/dynamic/private';
 import {version} from '$app/environment';
 
-//write a method to handle if the KINDE_REDIRECT_URL is not a valid url new URL(env.KINDE_REDIRECT_URL).origin
 function getBaseURL() {
 	try {
 		return new URL(env.KINDE_REDIRECT_URL).origin;
 	} catch (error) {
+		console.error('Invalid KINDE_REDIRECT_URL:', error.message);
 		return '';
 	}
 }
