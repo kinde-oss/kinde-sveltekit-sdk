@@ -1,4 +1,4 @@
-import { sessionStorage } from '$lib/sessionStorage/index.js';
+import {sessionStorage} from '$lib/sessionStorage/index.js';
 
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
