@@ -7,7 +7,7 @@ export async function sessionHooks({event}: {event: EventHandler}) {
 			typeof itemValue === 'string' ? itemValue : (JSON.stringify(itemValue) as string),
 			{
 				path: '/',
-				secure: true,
+				secure: process.env.NODE_ENV === 'production',
 				sameSite: 'lax',
 				httpOnly: true
 			}
