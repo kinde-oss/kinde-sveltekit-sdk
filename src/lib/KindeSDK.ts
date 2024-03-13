@@ -13,6 +13,14 @@ import {
 } from '@kinde-oss/kinde-typescript-sdk';
 import {omit} from './utils/index.js';
 
+export const getToken = async () => {
+	const kindeManagementApi = createKindeServerClient(
+		GrantType.CLIENT_CREDENTIALS,
+		kindeAPIConfiguration as unknown as CCClientOptions
+	);
+	return await kindeManagementApi.getToken(sessionStorage as unknown as SessionManager);
+};
+
 export const kindeAuthClient = createKindeServerClient(
 	kindeConfiguration.authUsePKCE ? GrantType.PKCE : GrantType.AUTHORIZATION_CODE,
 	omit(
@@ -22,34 +30,19 @@ export const kindeAuthClient = createKindeServerClient(
 );
 
 export const getHeaders = async () => {
-	const kindeManagementApi = createKindeServerClient(
-		GrantType.CLIENT_CREDENTIALS,
-		kindeAPIConfiguration as unknown as CCClientOptions
-	);
-
-	const token = await kindeManagementApi.getToken(sessionStorage as unknown as SessionManager);
-
 	return {
-		Authorization: `Bearer ${token}`,
+		Authorization: `Bearer ${await getToken()}`,
 		Accept: 'application/json'
 	};
 };
 
 export const getConfiguration = async (configurationOverrides?: ConfigurationParameters) => {
-	const kindeManagementApi = createKindeServerClient(
-		GrantType.CLIENT_CREDENTIALS,
-		kindeAPIConfiguration as unknown as CCClientOptions
-	);
-
-	const token = await kindeManagementApi.getToken(sessionStorage as unknown as SessionManager);
-
-	const config = new Configuration({
+	return new Configuration({
 		basePath: kindeConfiguration.authDomain,
-		accessToken: token,
+		accessToken: await getToken(),
 		headers: {
 			Accept: 'application/json'
 		},
 		...(configurationOverrides || {})
 	});
-	return config;
 };

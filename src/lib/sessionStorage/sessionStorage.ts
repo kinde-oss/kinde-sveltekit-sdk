@@ -1,3 +1,5 @@
+import type {SessionManager} from '@kinde-oss/kinde-typescript-sdk';
+
 class SessionStorage {
 	private session: Record<string, string>;
 
@@ -32,4 +34,4 @@ globalThis.KindeSDK = {
 	...(globalThis.KindeSDK ?? {}),
 	SessionStorage: (globalThis.KindeSDK ?? {}).SessionStorage ?? new SessionStorage()
 };
-export const sessionStorage = globalThis.KindeSDK.SessionStorage as SessionStorage;
+export const sessionStorage = globalThis.KindeSDK.SessionStorage as SessionManager;
