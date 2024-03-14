@@ -2,38 +2,32 @@ import {describe, beforeEach, it, expect, vi} from 'vitest';
 import {kindeAuthClient, kindeConfiguration, handleAuth} from '$lib/index.js';
 
 vi.mock('$lib/sessionStorage/sessionStorage.js');
+vi.mock('$lib/index.js', async () => {
+	const originalModule = await vi.importActual('$lib/index.js');
+
+	const kindeConfiguration = {
+		authDomain: 'https://testdomain.kinde.com',
+		logoutRedirectURL: 'http://localhost:3000',
+		redirectURL: 'http://localhost:3000/api/auth/callback',
+		appBase: 'http://localhost:3000',
+		clientSecret: 'asdfgaskjasfkjasfljasflajslfjaslfjalsfjalskfjlas',
+		loginRedirectURL: 'http://localhost:3000/dashboard',
+		authUsePKCE: false,
+		debug: false
+	};
+
+	console.log('originalModule', originalModule);
+	return {
+		...originalModule,
+		getConfiguration: vi.fn().mockReturnValue(kindeConfiguration),
+		kindeConfiguration: kindeConfiguration,
+		kindeAPIConfiguration: kindeConfiguration
+	};
+});
 
 describe('HandleAuth', () => {
 	beforeEach(() => {
 		vi.clearAllMocks();
-	});
-
-	vi.mock('$lib/index.js', async () => {
-		const originalModule = await vi.importActual('$lib/index.js');
-
-		return {
-			...originalModule,
-			kindeConfiguration: {
-				authDomain: 'https://testdomain.kinde.com',
-				logoutRedirectURL: 'http://localhost:3000',
-				redirectURL: 'http://localhost:3000/api/auth/callback',
-				appBase: 'http://localhost:3000',
-				clientSecret: 'asdfgaskjasfkjasfljasflajslfjaslfjalsfjalskfjlas',
-				loginRedirectURL: 'http://localhost:3000/dashboard',
-				authUsePKCE: false,
-				debug: false
-			},
-			kindeAPIConfiguration: {
-				authDomain: 'https://testdomain.kinde.com',
-				logoutRedirectURL: 'http://localhost:3000',
-				redirectURL: 'http://localhost:3000/api/auth/callback',
-				appBase: 'http://localhost:3000',
-				clientSecret: 'asdfgaskjasfkjasfljasflajslfjaslfjalsfjalskfjlas',
-				loginRedirectURL: 'http://localhost:3000/dashboard',
-				authUsePKCE: false,
-				debug: false
-			}
-		};
 	});
 
 	it('should handle login requests', async () => {
