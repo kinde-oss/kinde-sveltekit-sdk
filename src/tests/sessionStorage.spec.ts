@@ -1,6 +1,5 @@
-import {describe, beforeEach, expect, it} from 'vitest';
+import {describe, expect, it} from 'vitest';
 import {sessionStorage} from '../lib/sessionStorage/index.js';
-import {type SessionManager} from '@kinde-oss/kinde-typescript-sdk';
 
 describe('SessionStorage', () => {
 	describe('setSessionItem', () => {
