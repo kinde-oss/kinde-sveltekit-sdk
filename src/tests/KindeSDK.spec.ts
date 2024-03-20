@@ -1,3 +1,4 @@
+// file deepcode ignore HardcodedNonCryptoSecret/test: <test file>
 import {describe, it, expect, afterEach, vi} from 'vitest';
 import * as kindeSDK from '$lib/KindeSDK.js';
 import {Configuration} from '@kinde-oss/kinde-typescript-sdk';
@@ -19,7 +20,6 @@ describe('KindeSDK', () => {
 			logoutRedirectURL: 'http://localhost:3000',
 			redirectURL: 'http://localhost:3000/api/auth/callback',
 			appBase: 'http://localhost:3000',
-			// file deepcode ignore HardcodedNonCryptoSecret/test: <please specify a reason of ignoring this>
 			clientSecret: 'asdfgaskjasfkjasfljasflajslfjaslfjalsfjalskfjlas',
 			loginRedirectURL: 'http://localhost:3000/dashboard',
 			authUsePKCE: false,
