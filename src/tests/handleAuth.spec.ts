@@ -16,7 +16,6 @@ vi.mock('$lib/index.js', async () => {
 		debug: false
 	};
 
-	console.log('originalModule', originalModule);
 	return {
 		...originalModule,
 		getConfiguration: vi.fn().mockReturnValue(kindeConfiguration),

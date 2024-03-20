@@ -13,7 +13,6 @@ export async function handleAuth({
 	params,
 	url: originURL
 }: RequestEvent): Promise<Response> {
-	console.log('kindeConfiguration', kindeConfiguration);
 	const options = parseSearchParamsToObject(originURL.search);
 	let url: URL | null = null;
 	switch (params.kindeAuth) {
@@ -22,7 +21,6 @@ export async function handleAuth({
 			url = await kindeAuthClient.login(request as unknown as SessionManager, options);
 			break;
 		case 'health':
-			console.log('kindeConfiguration.debug', kindeConfiguration.debug);
 			if (!kindeConfiguration.debug) {
 				url = new URL(kindeConfiguration.loginRedirectURL);
 				break;

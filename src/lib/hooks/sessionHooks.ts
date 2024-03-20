@@ -2,7 +2,6 @@ import type {EventHandler} from '$lib/types/handler.js';
 
 export async function sessionHooks({event}: {event: EventHandler}) {
 	event.request.setSessionItem = async (itemKey: string, itemValue: unknown) => {
-		console.log(typeof itemValue === 'string');
 		event.cookies.set(
 			`kinde_${itemKey}`,
 			typeof itemValue === 'string' ? itemValue : (JSON.stringify(itemValue) as string),

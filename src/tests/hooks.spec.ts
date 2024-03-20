@@ -95,9 +95,7 @@ describe('sessionHooks', () => {
 				set: vi.fn(),
 				get: vi.fn().mockImplementation(() => JSON.stringify(objectValue['kinde_' + key])),
 				delete: vi.fn().mockImplementation((key) => {
-					console.log('delete', key);
 					delete objectValue[key];
-					console.log('delete', objectValue);
 				})
 			}
 		};
@@ -109,7 +107,6 @@ describe('sessionHooks', () => {
 
 		// Assert
 		const retrievedValue = event.request.getSessionItem('kinde_' + key);
-		console.log('retrievedValue', retrievedValue);
 		expect(retrievedValue).toBeUndefined();
 	});
 
