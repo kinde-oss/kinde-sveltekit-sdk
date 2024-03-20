@@ -40,4 +40,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-
       - run: pnpm build
-      - run: pnpm test
+      - run: pnpm test:coverage
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: kinde-oss/kinde-sveltekit-sdk
