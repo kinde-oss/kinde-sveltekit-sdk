@@ -19,6 +19,7 @@ describe('KindeSDK', () => {
 			logoutRedirectURL: 'http://localhost:3000',
 			redirectURL: 'http://localhost:3000/api/auth/callback',
 			appBase: 'http://localhost:3000',
+			// file deepcode ignore HardcodedNonCryptoSecret/test: <please specify a reason of ignoring this>
 			clientSecret: 'asdfgaskjasfkjasfljasflajslfjaslfjalsfjalskfjlas',
 			loginRedirectURL: 'http://localhost:3000/dashboard',
 			authUsePKCE: false,

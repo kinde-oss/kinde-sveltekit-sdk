@@ -1,3 +1,4 @@
+// file deepcode ignore HardcodedNonCryptoSecret/test: <test file>
 import {describe, beforeEach, it, expect, vi} from 'vitest';
 import {kindeAuthClient, kindeConfiguration, handleAuth} from '$lib/index.js';
 
