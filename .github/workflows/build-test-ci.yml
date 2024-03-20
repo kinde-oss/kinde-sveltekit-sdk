@@ -1,0 +1,42 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them,
+# build the source code and run tests. It was created by using the following workflow
+# as a template.
+#
+# https://pnpm.io/next/continuous-integration#github-actions
+
+name: Build and test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - name: Setting up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+      - name: Enabling pre-post scripts
+        run: pnpm config set enable-pre-post-scripts true
+      - run: pnpm install
+      - name: Cache pnpm modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+      - run: pnpm build
+      - run: pnpm test

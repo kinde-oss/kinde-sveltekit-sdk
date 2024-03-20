@@ -33,6 +33,7 @@ export async function handleAuth({
 					redirectURL: kindeConfiguration.redirectURL || '',
 					audience: kindeConfiguration.audience || '',
 					scope: kindeConfiguration.scope || '',
+					// deepcode ignore HardcodedNonCryptoSecret: <this is read from env var vand validated here>
 					clientSecret: validateClientSecret(kindeConfiguration.clientSecret || '')
 						? 'Set correctly'
 						: 'Not set correctly',
