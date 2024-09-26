@@ -42,11 +42,35 @@ export const parseSearchParamsToObject = (search: string) => {
         "state",
         "post_login_redirect_url",
         "authUrlParams",
+        "redirect_url"
       ].includes(key)
     ) {
       delete paramsObject[key];
     }
   });
+
+
+  Object.keys(paramsObject.authUrlParams).forEach((key) => {
+    if (
+      [
+        "start_page",
+        "is_create_org",
+        "response_type",
+        "org_name",
+        "org_code",
+        "state",
+        "post_login_redirect_url",
+        "authUrlParams",
+        "redirect_url"
+      ].includes(key)
+    ) {
+      delete paramsObject.authUrlParams[key];
+    }
+  });
+
+  if (Object.keys(paramsObject.authUrlParams).length === 0) {
+    delete paramsObject.authUrlParams;
+  }
 
   return paramsObject;
 };
