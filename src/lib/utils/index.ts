@@ -29,6 +29,24 @@ export const parseSearchParamsToObject = (search: string) => {
   for (const param of searchParams.entries()) {
     paramsObject[param[0]] = param[1];
   }
+  paramsObject.authUrlParams = Object.assign({ ...paramsObject });
+
+  Object.keys(paramsObject).forEach((key) => {
+    if (
+      ![
+        "start_page",
+        "is_create_org",
+        "response_type",
+        "org_name",
+        "org_code",
+        "state",
+        "post_login_redirect_url",
+        "authUrlParams",
+      ].includes(key)
+    ) {
+      delete paramsObject[key];
+    }
+  });
 
   return paramsObject;
 };
