@@ -11,6 +11,7 @@ export async function sessionHooks({ event }: { event: EventHandler }) {
         ? itemValue
         : (JSON.stringify(itemValue) as string),
       {
+        domain: process.env.KINDE_COOKIE_DOMAIN,
         path: "/",
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
