@@ -6,8 +6,10 @@ describe("Utils", () => {
     it("should parse search parameters to an object", () => {
       const searchParams = "?param1=value1&param2=value2";
       const expectedOutput = {
-        param1: "value1",
-        param2: "value2",
+        authUrlParams: {
+          param1: "value1",
+          param2: "value2",
+        },
       };
 
       const output = parseSearchParamsToObject(searchParams);
