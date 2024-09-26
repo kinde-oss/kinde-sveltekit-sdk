@@ -9,7 +9,7 @@ describe("Utils", () => {
         authUrlParams: {
           param1: "value1",
           param2: "value2",
-        }
+        },
       };
 
       const output = parseSearchParamsToObject(searchParams);
