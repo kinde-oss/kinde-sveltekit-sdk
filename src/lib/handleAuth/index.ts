@@ -1,1 +1,1 @@
-export * from './handleAuth.js';
+export * from "./handleAuth.js";
