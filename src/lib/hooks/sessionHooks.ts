@@ -41,13 +41,17 @@ export async function sessionHooks({ event }: { event: EventHandler }) {
   event.request.removeSessionItem = async (itemKey: string) => {
     return event.cookies.delete(`kinde_${itemKey}`, {
       path: "/",
+      domain: process.env.KINDE_COOKIE_DOMAIN,
     });
   };
 
   event.request.destroySession = async () => {
     event.cookies.getAll().forEach((item) => {
       if (/^kinde_/.test(item.name)) {
-        event.cookies.delete(item.name, { path: "/" });
+        event.cookies.delete(item.name, {
+          path: "/",
+          domain: process.env.KINDE_COOKIE_DOMAIN,
+        });
       }
     });
     return;
