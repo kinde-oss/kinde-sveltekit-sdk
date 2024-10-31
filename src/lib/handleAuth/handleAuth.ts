@@ -74,14 +74,14 @@ export async function handleAuth({
         new URL(request.url),
       );
       redirectToPostLoginUrl();
-      throw redirect(302, kindeConfiguration.loginRedirectURL ?? "/");
+      redirect(302, kindeConfiguration.loginRedirectURL ?? "/");
     case "logout":
       url = await kindeAuthClient.logout(request as unknown as SessionManager);
       break;
     default:
-      throw error(404, "Not Found");
+      error(404, "Not Found");
   }
-  throw redirect(302, url.toString());
+  redirect(302, url.toString());
 }
 
 const storePostLoginRedirectUrl = (
@@ -109,12 +109,12 @@ const redirectToPostLoginUrl = () => {
     sessionStorage.removeSessionItem(KEY_POST_LOGIN_REDIRECT_URL);
 
     if (isAbsoluteUrl(post_login_redirect_url)) {
-      throw redirect(302, new URL(post_login_redirect_url));
+      redirect(302, new URL(post_login_redirect_url));
     } else {
-      throw redirect(
-        302,
-        new URL(post_login_redirect_url, kindeConfiguration.appBase),
-      );
+      redirect(
+                302,
+                new URL(post_login_redirect_url, kindeConfiguration.appBase),
+              );
     }
   }
 };
