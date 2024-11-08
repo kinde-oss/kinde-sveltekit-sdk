@@ -39,8 +39,8 @@
     "!dist/**/*.spec.*"
   ],
   "peerDependencies": {
-    "@sveltejs/kit": "^1.20.4 || ^2.0.0",
-    "svelte": "^4.0.0 || ^5.0.0"
+    "@sveltejs/kit": "^2",
+    "svelte": "^5"
   },
   "dependencies": {
     "@kinde-oss/kinde-typescript-sdk": "^2.7.2"
