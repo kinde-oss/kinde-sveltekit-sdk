@@ -74,12 +74,12 @@ export async function handleAuth({
         new URL(request.url),
       );
       redirectToPostLoginUrl();
-      redirect(302, kindeConfiguration.loginRedirectURL ?? "/");
+      return redirect(302, kindeConfiguration.loginRedirectURL ?? "/");
     case "logout":
       url = await kindeAuthClient.logout(request as unknown as SessionManager);
       break;
     default:
-      error(404, "Not Found");
+      return error(404, "Not Found");
   }
   redirect(302, url.toString());
 }
