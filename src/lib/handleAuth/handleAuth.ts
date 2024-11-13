@@ -112,9 +112,9 @@ const redirectToPostLoginUrl = () => {
       redirect(302, new URL(post_login_redirect_url));
     } else {
       redirect(
-                302,
-                new URL(post_login_redirect_url, kindeConfiguration.appBase),
-              );
+        302,
+        new URL(post_login_redirect_url, kindeConfiguration.appBase),
+      );
     }
   }
 };
