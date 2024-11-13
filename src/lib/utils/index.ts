@@ -22,12 +22,39 @@ export const omit = (target: Record<string, unknown>, path: string[]) => {
   );
 };
 
+const rootParams = [
+  "start_page",
+  "is_create_org",
+  "response_type",
+  "org_name",
+  "org_code",
+  "state",
+  "post_login_redirect_url",
+  "authUrlParams",
+  "redirect_url",
+];
+
 export const parseSearchParamsToObject = (search: string) => {
   const searchParams = new URLSearchParams(search);
-  const paramsObject: Record<string, string | number> = {};
+  let paramsObject: Record<string, string | number | Record<string, unknown>> =
+    {};
 
   for (const param of searchParams.entries()) {
     paramsObject[param[0]] = param[1];
+  }
+  paramsObject.authUrlParams = { ...paramsObject };
+
+  paramsObject = pick(paramsObject, rootParams) as Record<
+    string,
+    string | number
+  >;
+  paramsObject.authUrlParams = omit(
+    paramsObject.authUrlParams as Record<string, unknown>,
+    rootParams,
+  );
+
+  if (Object.keys(paramsObject.authUrlParams).length === 0) {
+    delete paramsObject.authUrlParams;
   }
 
   return paramsObject;
