@@ -27,6 +27,7 @@ export const kindeConfiguration = {
 };
 
 export const kindeAPIConfiguration = {
+  authDomain: env.KINDE_ISSUER_URL,
   audience: `${env.KINDE_ISSUER_URL}/api`,
   clientId: env.KINDE_CLIENT_ID,
   clientSecret: env.KINDE_CLIENT_SECRET,
