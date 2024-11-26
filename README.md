@@ -75,6 +75,7 @@ Next step, create `.env` file:
 KINDE_AUDIENCE=your_kinde_api
 KINDE_CLIENT_ID=your_kinde_client_id // Please use an application with password method
 KINDE_CLIENT_SECRET=your_kinde_client_secret
+KINDE_COOKIE_DOMAIN=// domain to assign cookie to
 KINDE_ISSUER_URL=https://your_kinde_domain.kinde.com
 KINDE_POST_LOGIN_REDIRECT_URL=http://localhost:4173
 KINDE_POST_LOGOUT_REDIRECT_URL=http://localhost:4173
