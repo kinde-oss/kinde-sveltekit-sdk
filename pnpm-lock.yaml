@@ -47,8 +47,8 @@ devDependencies:
     specifier: ^3.2.7
     version: 3.3.2(prettier@3.4.0)(svelte@4.2.19)
   publint:
-    specifier: ^0.1.9
-    version: 0.1.16
+    specifier: ^0.2.0
+    version: 0.2.12
   svelte:
     specifier: ^4.0.5
     version: 4.2.19
@@ -2142,8 +2142,8 @@ packages:
       react-is: 18.3.1
     dev: true
 
-  /publint@0.1.16:
-    resolution: {integrity: sha512-wJgk7HnXDT5Ap0DjFYbGz78kPkN44iQvDiaq8P63IEEyNU9mYXvaMd2cAyIM6OgqXM/IA3CK6XWIsRq+wjNpgw==}
+  /publint@0.2.12:
+    resolution: {integrity: sha512-YNeUtCVeM4j9nDiTT2OPczmlyzOkIXNtdDZnSuajAxS/nZ6j3t7Vs9SUB4euQNddiltIwu7Tdd3s+hr08fAsMw==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
