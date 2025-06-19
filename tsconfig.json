@@ -1,19 +1,27 @@
 {
   "extends": "./.svelte-kit/tsconfig.json",
   "compilerOptions": {
-    "allowJs": true,
-    "checkJs": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
+    "declarationMap": true,
     "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["vite/client", "@kinde/js-utils"],
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "emitDeclarationOnly": false,
+    "declaration": true,
+    "declarationDir": "./dist",
+    "outDir": "./dist",
+    "module": "ESNext",
+    "target": "ES6",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
     "strict": true,
-    "moduleResolution": "NodeNext",
-    "baseUrl": ".",
     "paths": {
-      "$lib": ["./src/lib"],
-      "$lib/*": ["./src/lib/*"]
+      "/components": ["./src/lib/components/index.ts"]
     }
-  }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["src/**/*.test.tsx", "node_modules", "dist"]
 }

@@ -1,6 +1,6 @@
 {
   "name": "@kinde-oss/kinde-auth-sveltekit",
-  "version": "2.1.0",
+  "version": "2.2.1-0",
   "description": "Kinde SvelteKit SDK",
   "scripts": {
     "dev": "vite dev",
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kinde-oss/kinde-sveltekit-sdk"
+    "url": "git+https://github.com/kinde-oss/kinde-sveltekit-sdk.git"
   },
   "bugs": "https://github.com/kinde-oss/kinde-sveltekit-sdk",
   "homepage": "https://kinde.com",
@@ -43,7 +43,8 @@
     "svelte": "^4.0.0 || ^5.0.0"
   },
   "dependencies": {
-    "@kinde-oss/kinde-typescript-sdk": "^2.7.2"
+    "@kinde-oss/kinde-typescript-sdk": "^2.7.2",
+    "@kinde/js-utils": "^0.18.3"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^3.0.0",
