@@ -1,6 +1,6 @@
 {
   "name": "@kinde-oss/kinde-auth-sveltekit",
-  "version": "2.1.1-7",
+  "version": "2.2.1",
   "description": "Kinde SvelteKit SDK",
   "scripts": {
     "dev": "vite dev",
