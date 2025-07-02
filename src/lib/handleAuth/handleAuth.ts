@@ -93,7 +93,10 @@ export async function handleAuth({
   redirect(302, url.toString());
 }
 
-const openPortal = async (request: SessionManager, options: Record<string, string | number>) => {
+const openPortal = async (
+  request: SessionManager,
+  options: Record<string, string | number>,
+) => {
   const accessToken = await request.getSessionItem("access_token");
   if (!accessToken) {
     throw error(401, "User not authenticated");
@@ -102,14 +105,15 @@ const openPortal = async (request: SessionManager, options: Record<string, strin
   const storage = new MemoryStorage();
   setActiveStorage(storage);
   await storage.setSessionItem(StorageKeys.accessToken, accessToken);
-let portalUrl
+  let portalUrl;
   try {
-     portalUrl = await generatePortalUrl({...options, domain: kindeConfiguration.authDomain});
-    console.log('portalUrl:', portalUrl);
-    console.log('options:', options);
+    portalUrl = await generatePortalUrl({
+      ...options,
+      domain: kindeConfiguration.authDomain,
+    });
   } catch (err) {
-    console.log('err:', err);
-    throw error(500, "Failed to generate portal URL",);
+    console.log("err:", err);
+    throw error(500, "Failed to generate portal URL");
   }
   redirect(302, portalUrl.url.toString());
 };
