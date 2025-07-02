@@ -8,6 +8,12 @@ import {
 } from "@kinde-oss/kinde-typescript-sdk";
 import { error, redirect, type RequestEvent } from "@sveltejs/kit";
 import { version } from "$app/environment";
+import {
+  generatePortalUrl,
+  MemoryStorage,
+  setActiveStorage,
+  StorageKeys,
+} from "@kinde/js-utils";
 
 const KEY_POST_LOGIN_REDIRECT_URL = "post-login-redirect-url";
 
@@ -68,6 +74,9 @@ export async function handleAuth({
         options,
       );
       break;
+    case "portal":
+      await openPortal(request, options);
+      break;
     case "kinde_callback":
       await kindeAuthClient.handleRedirectToApp(
         request as unknown as SessionManager,
@@ -83,6 +92,31 @@ export async function handleAuth({
   }
   redirect(302, url.toString());
 }
+
+const openPortal = async (
+  request: SessionManager,
+  options: Record<string, string | number>,
+) => {
+  const accessToken = await request.getSessionItem("access_token");
+  if (!accessToken) {
+    throw error(401, "User not authenticated");
+  }
+
+  const storage = new MemoryStorage();
+  setActiveStorage(storage);
+  await storage.setSessionItem(StorageKeys.accessToken, accessToken);
+  let portalUrl;
+  try {
+    portalUrl = await generatePortalUrl({
+      ...options,
+      domain: kindeConfiguration.authDomain,
+    });
+  } catch (err) {
+    console.log("err:", err);
+    throw error(500, "Failed to generate portal URL");
+  }
+  redirect(302, portalUrl.url.toString());
+};
 
 const storePostLoginRedirectUrl = (
   options: Record<string, string | number>,
@@ -101,11 +135,11 @@ const storePostLoginRedirectUrl = (
 const isAbsoluteUrl = (url: string) =>
   url.indexOf("http://") === 0 || url.indexOf("https://") === 0;
 
-const redirectToPostLoginUrl = () => {
-  if (sessionStorage.getSessionItem(KEY_POST_LOGIN_REDIRECT_URL)) {
-    const post_login_redirect_url = sessionStorage.getSessionItem(
+const redirectToPostLoginUrl = async () => {
+  if (await sessionStorage.getSessionItem(KEY_POST_LOGIN_REDIRECT_URL)) {
+    const post_login_redirect_url = (await sessionStorage.getSessionItem(
       KEY_POST_LOGIN_REDIRECT_URL,
-    );
+    )) as string;
     sessionStorage.removeSessionItem(KEY_POST_LOGIN_REDIRECT_URL);
 
     if (isAbsoluteUrl(post_login_redirect_url)) {

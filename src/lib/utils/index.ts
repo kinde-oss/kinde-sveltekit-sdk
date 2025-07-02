@@ -32,6 +32,9 @@ const rootParams = [
   "post_login_redirect_url",
   "authUrlParams",
   "redirect_url",
+  "returnUrl",
+  "domain",
+  "subNav",
 ];
 
 export const parseSearchParamsToObject = (search: string) => {
