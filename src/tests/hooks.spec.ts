@@ -157,7 +157,6 @@ describe("sessionHooks", () => {
 
   it("should set cookies with 29-day expiry", async () => {
     // Arrange
-    const TWENTY_NINE_DAYS = 29 * 24 * 60 * 60; // 29 days in seconds
     const event = {
       request: {},
       cookies: {
@@ -176,7 +175,7 @@ describe("sessionHooks", () => {
       "kinde_testKey",
       "testValue",
       expect.objectContaining({
-        maxAge: TWENTY_NINE_DAYS,
+        maxAge: 29 * 24 * 60 * 60,
         domain: process.env.KINDE_COOKIE_DOMAIN,
         path: "/",
         secure: process.env.NODE_ENV === "production",

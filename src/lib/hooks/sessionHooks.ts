@@ -1,8 +1,6 @@
 import type { EventHandler } from "$lib/types/handler.js";
 
 export async function sessionHooks({ event }: { event: EventHandler }) {
-  const TWENTY_NINE_DAYS = 29 * 24 * 60 * 60; // 29 days in seconds
-
   event.request.setSessionItem = async (
     itemKey: string,
     itemValue: unknown,
@@ -18,7 +16,7 @@ export async function sessionHooks({ event }: { event: EventHandler }) {
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
         httpOnly: true,
-        maxAge: TWENTY_NINE_DAYS,
+        maxAge: 29 * 24 * 60 * 60,
       },
     );
   };
