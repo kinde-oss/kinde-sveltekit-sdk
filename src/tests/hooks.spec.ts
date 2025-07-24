@@ -154,4 +154,34 @@ describe("sessionHooks", () => {
     expect(retrievedValue1).toBeUndefined();
     expect(retrievedValue2).toBeUndefined();
   });
+
+  it("should set cookies with 29-day expiry", async () => {
+    // Arrange
+    const event = {
+      request: {},
+      cookies: {
+        set: vi.fn(),
+        get: vi.fn(),
+      },
+    };
+
+    await sessionHooks({ event });
+
+    // Act
+    await event.request.setSessionItem("testKey", "testValue");
+
+    // Assert
+    expect(event.cookies.set).toHaveBeenCalledWith(
+      "kinde_testKey",
+      "testValue",
+      expect.objectContaining({
+        maxAge: 29 * 24 * 60 * 60,
+        domain: process.env.KINDE_COOKIE_DOMAIN,
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        httpOnly: true,
+      }),
+    );
+  });
 });

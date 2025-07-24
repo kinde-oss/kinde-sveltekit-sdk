@@ -16,6 +16,7 @@ export async function sessionHooks({ event }: { event: EventHandler }) {
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
         httpOnly: true,
+        maxAge: 29 * 24 * 60 * 60,
       },
     );
   };
