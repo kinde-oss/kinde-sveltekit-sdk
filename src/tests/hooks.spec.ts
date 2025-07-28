@@ -212,7 +212,7 @@ describe("sessionHooks", () => {
       );
     });
 
-        it("should fallback to default when KINDE_SESSION_MAX_AGE is zero", async () => {
+    it("should fallback to default when KINDE_SESSION_MAX_AGE is zero", async () => {
       process.env.KINDE_SESSION_MAX_AGE = "0";
 
       const event = {
