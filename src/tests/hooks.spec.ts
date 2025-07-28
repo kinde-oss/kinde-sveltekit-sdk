@@ -175,7 +175,7 @@ describe("sessionHooks", () => {
       "kinde_testKey",
       "testValue",
       expect.objectContaining({
-        maxAge: 29 * 24 * 60 * 60,
+        maxAge: +(process.env.KINDE_SESSION_MAX_AGE ?? '') || 29 * 24 * 60 * 60,
         domain: process.env.KINDE_COOKIE_DOMAIN,
         path: "/",
         secure: process.env.NODE_ENV === "production",
