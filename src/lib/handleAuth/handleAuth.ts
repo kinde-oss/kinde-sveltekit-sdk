@@ -145,9 +145,13 @@ const redirectToPostLoginUrl = async () => {
   const post_login_redirect_url = value as string;
   sessionStorage.removeSessionItem(KEY_POST_LOGIN_REDIRECT_URL);
 
+  const appBaseUrl = new URL(kindeConfiguration.appBase);
   if (isAbsoluteUrl(post_login_redirect_url)) {
-    redirect(302, new URL(post_login_redirect_url));
-  } else {
-    redirect(302, new URL(post_login_redirect_url, kindeConfiguration.appBase));
+    const target = new URL(post_login_redirect_url);
+    if (target.origin !== appBaseUrl.origin) {
+      return;
+    }
+    throw redirect(302, target.toString());
   }
+  throw redirect(302, new URL(post_login_redirect_url, appBaseUrl).toString());
 };
