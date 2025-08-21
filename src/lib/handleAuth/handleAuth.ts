@@ -82,7 +82,7 @@ export async function handleAuth({
         request as unknown as SessionManager,
         new URL(request.url),
       );
-      redirectToPostLoginUrl();
+      await redirectToPostLoginUrl();
       return redirect(302, kindeConfiguration.loginRedirectURL ?? "/");
     case "logout":
       url = await kindeAuthClient.logout(request as unknown as SessionManager);
