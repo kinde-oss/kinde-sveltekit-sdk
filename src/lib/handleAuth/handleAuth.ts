@@ -82,15 +82,15 @@ export async function handleAuth({
         request as unknown as SessionManager,
         new URL(request.url),
       );
-      redirectToPostLoginUrl();
-      return redirect(302, kindeConfiguration.loginRedirectURL ?? "/");
+      await redirectToPostLoginUrl();
+      throw redirect(302, kindeConfiguration.loginRedirectURL || "/");
     case "logout":
       url = await kindeAuthClient.logout(request as unknown as SessionManager);
       break;
     default:
       return error(404, "Not Found");
   }
-  redirect(302, url.toString());
+  throw redirect(302, url.toString());
 }
 
 const openPortal = async (
@@ -115,7 +115,7 @@ const openPortal = async (
     console.log("err:", err);
     throw error(500, "Failed to generate portal URL");
   }
-  redirect(302, portalUrl.url.toString());
+  throw redirect(302, portalUrl.url.toString());
 };
 
 const storePostLoginRedirectUrl = (
@@ -136,19 +136,22 @@ const isAbsoluteUrl = (url: string) =>
   url.indexOf("http://") === 0 || url.indexOf("https://") === 0;
 
 const redirectToPostLoginUrl = async () => {
-  if (await sessionStorage.getSessionItem(KEY_POST_LOGIN_REDIRECT_URL)) {
-    const post_login_redirect_url = (await sessionStorage.getSessionItem(
-      KEY_POST_LOGIN_REDIRECT_URL,
-    )) as string;
-    sessionStorage.removeSessionItem(KEY_POST_LOGIN_REDIRECT_URL);
-
-    if (isAbsoluteUrl(post_login_redirect_url)) {
-      redirect(302, new URL(post_login_redirect_url));
-    } else {
-      redirect(
-        302,
-        new URL(post_login_redirect_url, kindeConfiguration.appBase),
-      );
-    }
+  const value = await sessionStorage.getSessionItem(
+    KEY_POST_LOGIN_REDIRECT_URL,
+  );
+  if (!value || typeof value !== "string") {
+    return;
   }
+  const post_login_redirect_url = value as string;
+  sessionStorage.removeSessionItem(KEY_POST_LOGIN_REDIRECT_URL);
+
+  const appBaseUrl = new URL(kindeConfiguration.appBase);
+  if (isAbsoluteUrl(post_login_redirect_url)) {
+    const target = new URL(post_login_redirect_url);
+    if (target.origin !== appBaseUrl.origin) {
+      return;
+    }
+    throw redirect(302, target.toString());
+  }
+  throw redirect(302, new URL(post_login_redirect_url, appBaseUrl).toString());
 };
