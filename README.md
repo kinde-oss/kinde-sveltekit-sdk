@@ -92,7 +92,9 @@ const myTokenStore = createTokenStore();
 await myTokenStore.sync();
 
 // Check if syncing is in progress
-$myTokenStore.isSyncing; // boolean
+const isSyncing = myTokenStore.isSyncing;
+// In a Svelte component you can then use:
+// $isSyncing; // boolean
 
 // Access the token
 $myTokenStore; // Current token or null
@@ -122,7 +124,7 @@ Here's a complete example of using the token store with an API client:
 
 ```typescript
 // lib/apiClient.ts
-import { writable } from "svelte/store";
+import { writable, get } from "svelte/store";
 import { syncTokenWithStore } from "@kinde-oss/kinde-auth-sveltekit";
 
 const apiToken = writable<string | null>(null);
@@ -134,7 +136,7 @@ export async function initApiClient() {
 
 // Make API calls using the token
 export async function fetchFromBackend(endpoint: string) {
-  const token = $apiToken;
+  const token = get(apiToken);
   if (!token) {
     throw new Error("Not authenticated");
   }
