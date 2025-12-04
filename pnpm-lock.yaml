@@ -63,7 +63,7 @@ devDependencies:
     version: 3.4.0(prettier@3.6.2)(svelte@4.2.20)
   publint:
     specifier: ^0.3.0
-    version: 0.3.14
+    version: 0.3.15
   svelte:
     specifier: ^4.0.5
     version: 4.2.20
@@ -2202,8 +2202,8 @@ packages:
       p-limit: 3.1.0
     dev: true
 
-  /package-manager-detector@1.4.0:
-    resolution: {integrity: sha512-rRZ+pR1Usc+ND9M2NkmCvE/LYJS+8ORVV9X0KuNSY/gFsp7RBHJM/ADh9LYq4Vvfq6QkKrW6/weuh8SMEtN5gw==}
+  /package-manager-detector@1.6.0:
+    resolution: {integrity: sha512-61A5ThoTiDG/C8s8UMZwSorAGwMJ0ERVGj2OjoW5pAalsNOg15+iQiPzrLJ4jhZ1HJzmC2PIHT2oEiH3R5fzNA==}
     dev: true
 
   /parent-module@1.0.1:
@@ -2368,13 +2368,13 @@ packages:
       ansi-styles: 5.2.0
       react-is: 18.3.1
 
-  /publint@0.3.14:
-    resolution: {integrity: sha512-14/VNBvWsrBeqWNDw8c/DK5ERcZBUwL1rnkVx18cQnF3zadr3GfoYtvD8mxi1dhkWpaPHp8kfi92MDbjMeW3qw==}
+  /publint@0.3.15:
+    resolution: {integrity: sha512-xPbRAPW+vqdiaKy5sVVY0uFAu3LaviaPO3pZ9FaRx59l9+U/RKR1OEbLhkug87cwiVKxPXyB4txsv5cad67u+A==}
     engines: {node: '>=18'}
     hasBin: true
     dependencies:
       '@publint/pack': 0.1.2
-      package-manager-detector: 1.4.0
+      package-manager-detector: 1.6.0
       picocolors: 1.1.1
       sade: 1.8.1
     dev: true
