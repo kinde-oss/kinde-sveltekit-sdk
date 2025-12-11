@@ -49,7 +49,7 @@
   "dependencies": {
     "@kinde-oss/kinde-typescript-sdk": "^2.7.2",
     "@kinde/js-utils": "^0.20.1",
-    "@testing-library/svelte": "^5.2.8"
+    "@testing-library/svelte": "^5.2.9"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^3.0.0",
