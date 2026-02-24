@@ -10,11 +10,6 @@ vi.mock("$lib/index.js", () => ({
 
 import { handle } from "../hooks.server";
 
-type RedirectLikeError = {
-  status: number;
-  location: string;
-};
-
 describe("hooks.server handle", () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -23,20 +18,17 @@ describe("hooks.server handle", () => {
   it("redirects to invite register auth flow when invitation_code is present", async () => {
     const resolve = vi.fn();
 
-    try {
-      await handle({
+    await expect(
+      handle({
         event: {
           url: new URL("http://localhost:4173/?invitation_code=inv_123"),
         },
         resolve,
-      } as never);
-    } catch (error: unknown) {
-      const redirectError = error as RedirectLikeError;
-      expect(redirectError.status).toBe(302);
-      expect(redirectError.location).toBe(
-        "/api/auth/register?invitation_code=inv_123&is_invitation=true",
-      );
-    }
+      } as never),
+    ).rejects.toMatchObject({
+      status: 302,
+      location: "/api/auth/register?invitation_code=inv_123&is_invitation=true",
+    });
 
     expect(resolve).not.toHaveBeenCalled();
     expect(sessionHooksMock).not.toHaveBeenCalled();
