@@ -6,7 +6,6 @@ export default defineConfig({
 
   test: {
     include: ["src/**/*.{test,spec}.{js,ts}"],
-    root: "./lib",
     coverage: {
       include: ["src/lib/**/*.{js,ts}"],
     },
