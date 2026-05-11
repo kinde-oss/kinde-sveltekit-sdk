@@ -34,7 +34,7 @@ export async function sessionHooks({ event }: { event: EventHandler }) {
     try {
       const result = JSON.parse(item);
       return result;
-    } catch (error) {
+    } catch {
       return event.cookies.get(`kinde_${itemKey}`);
     }
   };

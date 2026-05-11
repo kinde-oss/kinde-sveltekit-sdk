@@ -11,7 +11,7 @@ class SessionStorage {
     try {
       const item = JSON.parse(this.session[itemKey]);
       return item;
-    } catch (error) {
+    } catch {
       return this.session[itemKey];
     }
   }
