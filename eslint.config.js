@@ -1,10 +1,11 @@
 import js from "@eslint/js";
+import { defineConfig } from "eslint/config";
 import tseslint from "typescript-eslint";
 import svelte from "eslint-plugin-svelte";
 import prettier from "eslint-config-prettier";
 import globals from "globals";
 
-export default tseslint.config(
+export default defineConfig([
   {
     ignores: [
       ".DS_Store",
@@ -22,7 +23,7 @@ export default tseslint.config(
     ],
   },
   js.configs.recommended,
-  tseslint.configs.recommended,
+  ...tseslint.configs.recommended,
   svelte.configs["flat/recommended"],
   prettier,
   {
@@ -52,4 +53,4 @@ export default tseslint.config(
       },
     },
   },
-);
+]);
