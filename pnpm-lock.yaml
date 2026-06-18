@@ -29,7 +29,7 @@ importers:
         version: 2.61.1(@sveltejs/vite-plugin-svelte@5.1.1(svelte@5.55.8(@typescript-eslint/types@8.59.4))(vite@6.4.2(@types/node@24.12.4)))(svelte@5.55.8(@typescript-eslint/types@8.59.4))(typescript@5.9.3)(vite@6.4.2(@types/node@24.12.4))
       '@sveltejs/package':
         specifier: ^2.0.0
-        version: 2.5.7(svelte@5.55.8(@typescript-eslint/types@8.59.4))(typescript@5.9.3)
+        version: 2.5.8(svelte@5.55.8(@typescript-eslint/types@8.59.4))(typescript@5.9.3)
       '@sveltejs/vite-plugin-svelte':
         specifier: ^5.1.1
         version: 5.1.1(svelte@5.55.8(@typescript-eslint/types@8.59.4))(vite@6.4.2(@types/node@24.12.4))
@@ -610,8 +610,8 @@ packages:
       typescript:
         optional: true
 
-  '@sveltejs/package@2.5.7':
-    resolution: {integrity: sha512-qqD9xa9H7TDiGFrF6rz7AirOR8k15qDK/9i4MIE8te4vWsv5GEogPks61rrZcLy+yWph+aI6pIj2MdoK3YI8AQ==}
+  '@sveltejs/package@2.5.8':
+    resolution: {integrity: sha512-zeBbsXYvHiBu56v4gJaGQoEHzg96w0E1j3dOMX8vo56s6vI5eQ57ZEZhudjwjnegnVitRRu5MrmhO0eNvaonIw==}
     engines: {node: ^16.14 || >=18}
     hasBin: true
     peerDependencies:
@@ -1567,6 +1567,11 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  semver@7.8.4:
+    resolution: {integrity: sha512-rUCObTnP32Q08R2uuIrt7r9PlEonuTmtuXYcW6s5kjdlj3xbnwe+21yXptAUYcMAABLkYYTtnmzb3w3EDZfueA==}
+    engines: {node: '>=10'}
+    hasBin: true
+
   set-cookie-parser@3.1.0:
     resolution: {integrity: sha512-kjnC1DXBHcxaOaOXBHBeRtltsDG2nUiUni+jP92M9gYdW12rsmx92UsfpH7o5tDRs7I1ZZPSQJQGv3UaRfCiuw==}
 
@@ -1682,8 +1687,8 @@ packages:
       typescript:
         optional: true
 
-  svelte2tsx@0.7.55:
-    resolution: {integrity: sha512-JWzgeM3lqySRNfqcsesvVEh8LhTWBxQJ9RMjzJ+VepdmXtVnNd0SbtGctG6+/fbHq0N6mhwSd823gszw9JHeGQ==}
+  svelte2tsx@0.7.56:
+    resolution: {integrity: sha512-NTvqqL+goYlW8gWNajk81L07+uu7jw5V2m1Az5MZbYm3GEydcHXh+uTrLHM9SuGuaqCtF90vlMXkOVBotfH94g==}
     peerDependencies:
       svelte: ^3.55 || ^4.0.0-next.0 || ^4.0 || ^5.0.0-next.0
       typescript: ^4.9.4 || ^5.0.0 || ^6.0.0
@@ -2301,14 +2306,14 @@ snapshots:
     optionalDependencies:
       typescript: 5.9.3
 
-  '@sveltejs/package@2.5.7(svelte@5.55.8(@typescript-eslint/types@8.59.4))(typescript@5.9.3)':
+  '@sveltejs/package@2.5.8(svelte@5.55.8(@typescript-eslint/types@8.59.4))(typescript@5.9.3)':
     dependencies:
       chokidar: 5.0.0
       kleur: 4.1.5
       sade: 1.8.1
-      semver: 7.8.0
+      semver: 7.8.4
       svelte: 5.55.8(@typescript-eslint/types@8.59.4)
-      svelte2tsx: 0.7.55(svelte@5.55.8(@typescript-eslint/types@8.59.4))(typescript@5.9.3)
+      svelte2tsx: 0.7.56(svelte@5.55.8(@typescript-eslint/types@8.59.4))(typescript@5.9.3)
     transitivePeerDependencies:
       - typescript
 
@@ -3105,7 +3110,7 @@ snapshots:
 
   make-dir@4.0.0:
     dependencies:
-      semver: 7.8.0
+      semver: 7.8.4
 
   min-indent@1.0.1: {}
 
@@ -3314,6 +3319,8 @@ snapshots:
 
   semver@7.8.0: {}
 
+  semver@7.8.4: {}
+
   set-cookie-parser@3.1.0: {}
 
   shebang-command@2.0.0:
@@ -3422,7 +3429,7 @@ snapshots:
       postcss-load-config: 3.1.4(postcss@8.5.14)
       typescript: 5.9.3
 
-  svelte2tsx@0.7.55(svelte@5.55.8(@typescript-eslint/types@8.59.4))(typescript@5.9.3):
+  svelte2tsx@0.7.56(svelte@5.55.8(@typescript-eslint/types@8.59.4))(typescript@5.9.3):
     dependencies:
       dedent-js: 1.0.1
       scule: 1.3.0
