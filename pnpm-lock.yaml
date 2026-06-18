@@ -56,7 +56,7 @@ importers:
         version: 10.1.8(eslint@10.4.0)
       eslint-plugin-svelte:
         specifier: ^3.17.1
-        version: 3.17.1(eslint@10.4.0)(svelte@5.55.8(@typescript-eslint/types@8.59.4))
+        version: 3.19.0(eslint@10.4.0)(svelte@5.55.8(@typescript-eslint/types@8.59.4))
       globals:
         specifier: ^17.0.0
         version: 17.6.0
@@ -77,7 +77,7 @@ importers:
         version: 5.55.8(@typescript-eslint/types@8.59.4)
       svelte-check:
         specifier: ^3.4.3
-        version: 3.8.6(postcss-load-config@3.1.4(postcss@8.5.14))(postcss@8.5.14)(svelte@5.55.8(@typescript-eslint/types@8.59.4))
+        version: 3.8.6(postcss-load-config@3.1.4(postcss@8.5.15))(postcss@8.5.15)(svelte@5.55.8(@typescript-eslint/types@8.59.4))
       tslib:
         specifier: ^2.4.1
         version: 2.8.1
@@ -799,6 +799,11 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
+  acorn@8.17.0:
+    resolution: {integrity: sha512-xRQbDb9BnwDafYNn6Vwl839DYVjqXYb1XVGtWAZ1kcDc6iwAL4hg3B1dZlRiuENFeO2H53gFG3in621AdERVAg==}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
+
   agent-base@7.1.4:
     resolution: {integrity: sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ==}
     engines: {node: '>= 14'}
@@ -1016,8 +1021,8 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
 
-  eslint-plugin-svelte@3.17.1:
-    resolution: {integrity: sha512-NyiXHtS3Ni7e532RBwS9OXlMKDIrENg3gY+/+ODjZzQx2xhU3NlJ+nIl1a93iUUQeiJL3lS8KLmY+W8hklzweQ==}
+  eslint-plugin-svelte@3.19.0:
+    resolution: {integrity: sha512-t3rNaZeXz4d2gG4uJyMEYfJCFKf22+SWbSizIIXIWKu4wM+XPLiMWuSSr/C5821JmFeN9ogK+eExbG+z+twyxw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: ^8.57.1 || ^9.0.0 || ^10.0.0
@@ -1481,12 +1486,16 @@ packages:
     peerDependencies:
       postcss: ^8.4.29
 
-  postcss-selector-parser@7.1.1:
-    resolution: {integrity: sha512-orRsuYpJVw8LdAwqqLykBj9ecS5/cRHlI5+nvTo8LcCKmzDmqVORXtOIYEEQuL9D4BxtA1lm5isAqzQZCoQ6Eg==}
+  postcss-selector-parser@7.1.4:
+    resolution: {integrity: sha512-HeP7D2wyhkR+XaK6v4W8oRF62Dsz4flyuczALJp61GckGm42u1saSSJ/0auvcBqxs3jMRFEcPK34At/0JBKdOg==}
     engines: {node: '>=4'}
 
   postcss@8.5.14:
     resolution: {integrity: sha512-SoSL4+OSEtR99LHFZQiJLkT59C5B1amGO1NzTwj7TT1qCUgUO6hxOvzkOYxD+vMrXBM3XJIKzokoERdqQq/Zmg==}
+    engines: {node: ^10 || ^12 || >=14}
+
+  postcss@8.5.15:
+    resolution: {integrity: sha512-FfR8sjd4em2T6fb3I2MwAJU7HWVMr9zba+enmQeeWFfCbm+UOC/0X4DS8XtpUTMwWMGbjKYP7xjfNekzyGmB3A==}
     engines: {node: ^10 || ^12 || >=14}
 
   prelude-ls@1.2.1:
@@ -1567,6 +1576,11 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  semver@7.8.4:
+    resolution: {integrity: sha512-rUCObTnP32Q08R2uuIrt7r9PlEonuTmtuXYcW6s5kjdlj3xbnwe+21yXptAUYcMAABLkYYTtnmzb3w3EDZfueA==}
+    engines: {node: '>=10'}
+    hasBin: true
+
   set-cookie-parser@3.1.0:
     resolution: {integrity: sha512-kjnC1DXBHcxaOaOXBHBeRtltsDG2nUiUni+jP92M9gYdW12rsmx92UsfpH7o5tDRs7I1ZZPSQJQGv3UaRfCiuw==}
 
@@ -1636,9 +1650,9 @@ packages:
     peerDependencies:
       svelte: ^3.55.0 || ^4.0.0-next.0 || ^4.0.0 || ^5.0.0-next.0
 
-  svelte-eslint-parser@1.6.1:
-    resolution: {integrity: sha512-hhvSH6kRj46UzrBVO5TaotD+Iuvruj5ccKBcO4wAhVcPTLmIc/c32D8UllBTYO0on4LzYuM0rNzf1lM/gBlkSQ==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0, pnpm: 10.33.0}
+  svelte-eslint-parser@1.8.0:
+    resolution: {integrity: sha512-mikR1qwIVy3t5WthUoAXkMwxkXvabZP9FJgdx35Ei7EbGWmctva1Pih16Koeor/bdNNq8NXHlwKGS6NkYTawLg==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0, pnpm: 10.34.1}
     peerDependencies:
       svelte: ^3.37.0 || ^4.0.0 || ^5.0.0
     peerDependenciesMeta:
@@ -2546,7 +2560,13 @@ snapshots:
     dependencies:
       acorn: 8.16.0
 
+  acorn-jsx@5.3.2(acorn@8.17.0):
+    dependencies:
+      acorn: 8.17.0
+
   acorn@8.16.0: {}
+
+  acorn@8.17.0: {}
 
   agent-base@7.1.4: {}
 
@@ -2748,7 +2768,7 @@ snapshots:
     dependencies:
       eslint: 10.4.0
 
-  eslint-plugin-svelte@3.17.1(eslint@10.4.0)(svelte@5.55.8(@typescript-eslint/types@8.59.4)):
+  eslint-plugin-svelte@3.19.0(eslint@10.4.0)(svelte@5.55.8(@typescript-eslint/types@8.59.4)):
     dependencies:
       '@eslint-community/eslint-utils': 4.9.1(eslint@10.4.0)
       '@jridgewell/sourcemap-codec': 1.5.5
@@ -2756,11 +2776,11 @@ snapshots:
       esutils: 2.0.3
       globals: 16.5.0
       known-css-properties: 0.37.0
-      postcss: 8.5.14
-      postcss-load-config: 3.1.4(postcss@8.5.14)
-      postcss-safe-parser: 7.0.1(postcss@8.5.14)
-      semver: 7.8.0
-      svelte-eslint-parser: 1.6.1(svelte@5.55.8(@typescript-eslint/types@8.59.4))
+      postcss: 8.5.15
+      postcss-load-config: 3.1.4(postcss@8.5.15)
+      postcss-safe-parser: 7.0.1(postcss@8.5.15)
+      semver: 7.8.4
+      svelte-eslint-parser: 1.8.0(svelte@5.55.8(@typescript-eslint/types@8.59.4))
     optionalDependencies:
       svelte: 5.55.8(@typescript-eslint/types@8.59.4)
     transitivePeerDependencies:
@@ -2823,8 +2843,8 @@ snapshots:
 
   espree@10.4.0:
     dependencies:
-      acorn: 8.16.0
-      acorn-jsx: 5.3.2(acorn@8.16.0)
+      acorn: 8.17.0
+      acorn-jsx: 5.3.2(acorn@8.17.0)
       eslint-visitor-keys: 4.2.1
 
   espree@11.2.0:
@@ -3189,27 +3209,33 @@ snapshots:
 
   picomatch@4.0.4: {}
 
-  postcss-load-config@3.1.4(postcss@8.5.14):
+  postcss-load-config@3.1.4(postcss@8.5.15):
     dependencies:
       lilconfig: 2.1.0
       yaml: 1.10.3
     optionalDependencies:
-      postcss: 8.5.14
+      postcss: 8.5.15
 
-  postcss-safe-parser@7.0.1(postcss@8.5.14):
+  postcss-safe-parser@7.0.1(postcss@8.5.15):
     dependencies:
-      postcss: 8.5.14
+      postcss: 8.5.15
 
-  postcss-scss@4.0.9(postcss@8.5.14):
+  postcss-scss@4.0.9(postcss@8.5.15):
     dependencies:
-      postcss: 8.5.14
+      postcss: 8.5.15
 
-  postcss-selector-parser@7.1.1:
+  postcss-selector-parser@7.1.4:
     dependencies:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
 
   postcss@8.5.14:
+    dependencies:
+      nanoid: 3.3.12
+      picocolors: 1.1.1
+      source-map-js: 1.2.1
+
+  postcss@8.5.15:
     dependencies:
       nanoid: 3.3.12
       picocolors: 1.1.1
@@ -3310,6 +3336,8 @@ snapshots:
 
   semver@7.8.0: {}
 
+  semver@7.8.4: {}
+
   set-cookie-parser@3.1.0: {}
 
   shebang-command@2.0.0:
@@ -3373,14 +3401,14 @@ snapshots:
     dependencies:
       has-flag: 4.0.0
 
-  svelte-check@3.8.6(postcss-load-config@3.1.4(postcss@8.5.14))(postcss@8.5.14)(svelte@5.55.8(@typescript-eslint/types@8.59.4)):
+  svelte-check@3.8.6(postcss-load-config@3.1.4(postcss@8.5.15))(postcss@8.5.15)(svelte@5.55.8(@typescript-eslint/types@8.59.4)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       chokidar: 3.6.0
       picocolors: 1.1.1
       sade: 1.8.1
       svelte: 5.55.8(@typescript-eslint/types@8.59.4)
-      svelte-preprocess: 5.1.4(postcss-load-config@3.1.4(postcss@8.5.14))(postcss@8.5.14)(svelte@5.55.8(@typescript-eslint/types@8.59.4))(typescript@5.9.3)
+      svelte-preprocess: 5.1.4(postcss-load-config@3.1.4(postcss@8.5.15))(postcss@8.5.15)(svelte@5.55.8(@typescript-eslint/types@8.59.4))(typescript@5.9.3)
       typescript: 5.9.3
     transitivePeerDependencies:
       - '@babel/core'
@@ -3393,19 +3421,19 @@ snapshots:
       - stylus
       - sugarss
 
-  svelte-eslint-parser@1.6.1(svelte@5.55.8(@typescript-eslint/types@8.59.4)):
+  svelte-eslint-parser@1.8.0(svelte@5.55.8(@typescript-eslint/types@8.59.4)):
     dependencies:
       eslint-scope: 8.4.0
       eslint-visitor-keys: 4.2.1
       espree: 10.4.0
-      postcss: 8.5.14
-      postcss-scss: 4.0.9(postcss@8.5.14)
-      postcss-selector-parser: 7.1.1
-      semver: 7.8.0
+      postcss: 8.5.15
+      postcss-scss: 4.0.9(postcss@8.5.15)
+      postcss-selector-parser: 7.1.4
+      semver: 7.8.4
     optionalDependencies:
       svelte: 5.55.8(@typescript-eslint/types@8.59.4)
 
-  svelte-preprocess@5.1.4(postcss-load-config@3.1.4(postcss@8.5.14))(postcss@8.5.14)(svelte@5.55.8(@typescript-eslint/types@8.59.4))(typescript@5.9.3):
+  svelte-preprocess@5.1.4(postcss-load-config@3.1.4(postcss@8.5.15))(postcss@8.5.15)(svelte@5.55.8(@typescript-eslint/types@8.59.4))(typescript@5.9.3):
     dependencies:
       '@types/pug': 2.0.10
       detect-indent: 6.1.0
@@ -3414,8 +3442,8 @@ snapshots:
       strip-indent: 3.0.0
       svelte: 5.55.8(@typescript-eslint/types@8.59.4)
     optionalDependencies:
-      postcss: 8.5.14
-      postcss-load-config: 3.1.4(postcss@8.5.14)
+      postcss: 8.5.15
+      postcss-load-config: 3.1.4(postcss@8.5.15)
       typescript: 5.9.3
 
   svelte2tsx@0.7.55(svelte@5.55.8(@typescript-eslint/types@8.59.4))(typescript@5.9.3):
