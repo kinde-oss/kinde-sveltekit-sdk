@@ -1,3 +1,5 @@
+export * from "./tokenSync.js";
+
 export const pick = (target: Record<string, unknown>, path: string[]) => {
   return Object.keys(target).reduce(
     (prev, curr) => {

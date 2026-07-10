@@ -57,6 +57,114 @@ npm run build
    }
    ```
 
+## Client-Side Token Synchronization
+
+When building an API client for a different backend that uses Kinde authentication tokens, you need a way to access the token in the browser. Since `getToken()` is server-side only, the SDK provides client-side token synchronization utilities.
+
+### Using the Default Token Store
+
+The simplest approach is to use the default `tokenStore`:
+
+```typescript
+import { tokenStore } from "@kinde-oss/kinde-auth-sveltekit";
+import { onMount } from "svelte";
+
+// In your component
+onMount(async () => {
+  // Sync the token when the component mounts
+  await tokenStore.sync();
+});
+
+// Use the token in your API client
+$tokenStore; // Current token or null
+```
+
+### Creating a Custom Token Store
+
+You can create your own token store instance:
+
+```typescript
+import { createTokenStore } from "@kinde-oss/kinde-auth-sveltekit";
+
+const myTokenStore = createTokenStore();
+
+// Sync the token
+await myTokenStore.sync();
+
+// Check if syncing is in progress
+const isSyncing = myTokenStore.isSyncing;
+// In a Svelte component you can then use:
+// $isSyncing; // boolean
+
+// Access the token
+$myTokenStore; // Current token or null
+```
+
+### Syncing with Your Own Store
+
+If you already have a Svelte store for your API client tokens, you can sync it with the Kinde token:
+
+```typescript
+import { syncTokenWithStore } from "@kinde-oss/kinde-auth-sveltekit";
+import { writable } from "svelte/store";
+
+// Your existing API token store
+const apiTokenStore = writable<string | null>(null);
+
+// Sync it with the Kinde token
+await syncTokenWithStore(apiTokenStore);
+
+// Now your store is in sync
+$apiTokenStore; // Current Kinde token or null
+```
+
+### Example: Using Token in API Client
+
+Here's a complete example of using the token store with an API client:
+
+```typescript
+// lib/apiClient.ts
+import { writable, get } from "svelte/store";
+import { syncTokenWithStore } from "@kinde-oss/kinde-auth-sveltekit";
+
+const apiToken = writable<string | null>(null);
+
+// Sync token on initialization
+export async function initApiClient() {
+  await syncTokenWithStore(apiToken);
+}
+
+// Make API calls using the token
+export async function fetchFromBackend(endpoint: string) {
+  const token = get(apiToken);
+  if (!token) {
+    throw new Error("Not authenticated");
+  }
+
+  const response = await fetch(`https://your-backend.com${endpoint}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+
+  return response.json();
+}
+```
+
+```svelte
+<!-- MyComponent.svelte -->
+<script>
+  import { onMount } from "svelte";
+  import { initApiClient, fetchFromBackend } from "$lib/apiClient";
+
+  onMount(async () => {
+    await initApiClient();
+    const data = await fetchFromBackend("/api/data");
+  });
+</script>
+```
+
 ### How to test
 
 Firstly, you need to install a web browser for testing purposes
