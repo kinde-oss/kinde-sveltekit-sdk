@@ -11,8 +11,8 @@ export default defineConfig({
     },
   },
   build: {
-    rollupOptions: {
-      external: [""],
+    rolldownOptions: {
+      external: [],
     },
   },
 });
