@@ -13,6 +13,8 @@ import {
   MemoryStorage,
   setActiveStorage,
   StorageKeys,
+  switchOrg,
+  type OrgCode,
 } from "@kinde/js-utils";
 
 const KEY_POST_LOGIN_REDIRECT_URL = "post-login-redirect-url";
@@ -74,6 +76,9 @@ export async function handleAuth({
         options,
       );
       break;
+    case "switch_org":
+      url = await switchOrgHandler(options);
+      break;
     case "portal":
       await openPortal(request, options);
       break;
@@ -92,6 +97,22 @@ export async function handleAuth({
   }
   throw redirect(302, url.toString());
 }
+
+const switchOrgHandler = async (
+  options: Record<string, string | number>,
+): Promise<URL> => {
+  const orgCode = options.org_code as string;
+  if (!orgCode) {
+    throw error(400, "org_code is required");
+  }
+  const result = await switchOrg({
+    domain: kindeConfiguration.authDomain,
+    clientId: kindeConfiguration.clientId,
+    orgCode: orgCode as OrgCode,
+    redirectURL: kindeConfiguration.redirectURL,
+  });
+  return result.url;
+};
 
 const openPortal = async (
   request: SessionManager,
