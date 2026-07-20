@@ -101,14 +101,14 @@ export async function handleAuth({
 const switchOrgHandler = async (
   options: Record<string, string | number>,
 ): Promise<URL> => {
-  const orgCode = options.org_code as string;
+  const orgCode = options.org_code as OrgCode;
   if (!orgCode) {
     throw error(400, "org_code is required");
   }
   const result = await switchOrg({
     domain: kindeConfiguration.authDomain,
     clientId: kindeConfiguration.clientId,
-    orgCode: orgCode as OrgCode,
+    orgCode,
     redirectURL: kindeConfiguration.redirectURL,
   });
   return result.url;
