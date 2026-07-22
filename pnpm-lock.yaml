@@ -12,8 +12,8 @@ importers:
         specifier: ^2.7.2
         version: 2.15.0
       '@kinde/js-utils':
-        specifier: ^0.20.1
-        version: 0.20.1
+        specifier: ^0.31.0
+        version: 0.31.0
       '@testing-library/svelte':
         specifier: ^5.2.8
         version: 5.4.2(svelte@5.56.7(@typescript-eslint/types@8.65.0))(vite@8.1.5(@types/node@24.13.3))(vitest@4.1.10)
@@ -247,8 +247,8 @@ packages:
     resolution: {integrity: sha512-sYb1eSEnjdDd0HXYzp/v9EaYaWUhruIfY1Vlmw+t4J6yaCUT4O//lfVxxGX0EB7uq11SqNwBPCQMCg+7eXYNdA==}
     engines: {node: '>=20'}
 
-  '@kinde/js-utils@0.20.1':
-    resolution: {integrity: sha512-NRza9rOyTyV8KOt6XkQXKwimNaN+R45KfrYwvhTV3NBesjvuvwEeoAkusg2jovW3PoJIoIxdiRUyQCxb6khrQQ==}
+  '@kinde/js-utils@0.30.1':
+    resolution: {integrity: sha512-7lPU7APljiBARIjkV0XGFjgmfoOJj8cTnbNnC98aEDWV2MnMbEH0XRiXjxDNzgGcCAgszfCM5d/Q744Lcq/K6Q==}
     peerDependencies:
       expo-secure-store: '>=11.0.0'
     peerDependenciesMeta:
@@ -1862,7 +1862,7 @@ snapshots:
     transitivePeerDependencies:
       - expo-secure-store
 
-  '@kinde/js-utils@0.20.1':
+  '@kinde/js-utils@0.30.1':
     dependencies:
       '@kinde/jwt-decoder': 0.2.1
 
