@@ -1,0 +1,10 @@
+# pnpm 11+ project settings (moved out of package.json#pnpm and non-auth .npmrc keys)
+# See https://pnpm.io/settings and https://pnpm.io/migration
+
+allowBuilds:
+  esbuild: true
+  svelte-preprocess: true
+
+enablePrePostScripts: true
+engineStrict: true
+resolutionMode: highest
