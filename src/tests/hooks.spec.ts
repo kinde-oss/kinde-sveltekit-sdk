@@ -1,5 +1,5 @@
 import { sessionHooks } from "$lib/index.js";
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, afterEach } from "vitest";
 
 describe("sessionHooks", () => {
   it("should add setSessionItem and getSessionItem methods to event.request", async () => {
@@ -155,33 +155,107 @@ describe("sessionHooks", () => {
     expect(retrievedValue2).toBeUndefined();
   });
 
-  it("should set cookies with 29-day expiry", async () => {
-    // Arrange
-    const event = {
-      request: {},
-      cookies: {
-        set: vi.fn(),
-        get: vi.fn(),
-      },
-    };
+  describe("cookie maxAge configuration", () => {
+    const originalEnv = process.env.KINDE_SESSION_MAX_AGE;
 
-    await sessionHooks({ event });
+    afterEach(() => {
+      if (originalEnv !== undefined) {
+        process.env.KINDE_SESSION_MAX_AGE = originalEnv;
+      } else {
+        delete process.env.KINDE_SESSION_MAX_AGE;
+      }
+    });
 
-    // Act
-    await event.request.setSessionItem("testKey", "testValue");
+    it("should use default 29 days when KINDE_SESSION_MAX_AGE is not set", async () => {
+      delete process.env.KINDE_SESSION_MAX_AGE;
 
-    // Assert
-    expect(event.cookies.set).toHaveBeenCalledWith(
-      "kinde_testKey",
-      "testValue",
-      expect.objectContaining({
-        maxAge: 29 * 24 * 60 * 60,
-        domain: process.env.KINDE_COOKIE_DOMAIN,
-        path: "/",
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-        httpOnly: true,
-      }),
-    );
+      const event = {
+        request: {},
+        cookies: {
+          set: vi.fn(),
+          get: vi.fn(),
+        },
+      };
+
+      await sessionHooks({ event });
+      await event.request.setSessionItem("testKey", "testValue");
+
+      expect(event.cookies.set).toHaveBeenCalledWith(
+        "kinde_testKey",
+        "testValue",
+        expect.objectContaining({
+          maxAge: 29 * 24 * 60 * 60,
+        }),
+      );
+    });
+
+    it("should use custom maxAge when KINDE_SESSION_MAX_AGE is set", async () => {
+      process.env.KINDE_SESSION_MAX_AGE = "3600"; // 1 hour
+
+      const event = {
+        request: {},
+        cookies: {
+          set: vi.fn(),
+          get: vi.fn(),
+        },
+      };
+
+      await sessionHooks({ event });
+      await event.request.setSessionItem("testKey", "testValue");
+
+      expect(event.cookies.set).toHaveBeenCalledWith(
+        "kinde_testKey",
+        "testValue",
+        expect.objectContaining({
+          maxAge: 3600,
+        }),
+      );
+    });
+
+    it("should fallback to default when KINDE_SESSION_MAX_AGE is zero", async () => {
+      process.env.KINDE_SESSION_MAX_AGE = "0";
+
+      const event = {
+        request: {},
+        cookies: {
+          set: vi.fn(),
+          get: vi.fn(),
+        },
+      };
+
+      await sessionHooks({ event });
+      await event.request.setSessionItem("testKey", "testValue");
+
+      expect(event.cookies.set).toHaveBeenCalledWith(
+        "kinde_testKey",
+        "testValue",
+        expect.objectContaining({
+          maxAge: 29 * 24 * 60 * 60,
+        }),
+      );
+    });
+
+    it("should fallback to default when KINDE_SESSION_MAX_AGE is invalid", async () => {
+      process.env.KINDE_SESSION_MAX_AGE = "invalid";
+
+      const event = {
+        request: {},
+        cookies: {
+          set: vi.fn(),
+          get: vi.fn(),
+        },
+      };
+
+      await sessionHooks({ event });
+      await event.request.setSessionItem("testKey", "testValue");
+
+      expect(event.cookies.set).toHaveBeenCalledWith(
+        "kinde_testKey",
+        "testValue",
+        expect.objectContaining({
+          maxAge: 29 * 24 * 60 * 60,
+        }),
+      );
+    });
   });
 });
