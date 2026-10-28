@@ -1,8 +1,8 @@
 import {
   kindeConfiguration,
   kindeAPIConfiguration,
-} from "$lib/config/index.js";
-import { sessionStorage } from "$lib/sessionStorage/index.js";
+} from "#lib/config/index.js";
+import { sessionStorage } from "#lib/sessionStorage/index.js";
 
 import {
   GrantType,

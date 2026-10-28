@@ -1,6 +1,8 @@
 import type { SessionManager } from "@kinde-oss/kinde-typescript-sdk";
-import type { MaybePromise, RequestEvent } from "@sveltejs/kit";
+import type { RequestEvent } from "@sveltejs/kit";
 import type { ResolveOptions } from "vite";
+
+type MaybePromise<T> = T | Promise<T>;
 
 export type EventHandler = RequestEvent & {
   request: RequestEvent["request"] &

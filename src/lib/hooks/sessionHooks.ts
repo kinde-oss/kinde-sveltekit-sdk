@@ -1,4 +1,4 @@
-import type { EventHandler } from "$lib/types/handler.js";
+import type { EventHandler } from "#lib/types/handler.js";
 
 export async function sessionHooks({ event }: { event: EventHandler }) {
   event.request.setSessionItem = async (

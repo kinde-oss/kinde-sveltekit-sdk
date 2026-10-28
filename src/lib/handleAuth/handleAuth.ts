@@ -1,7 +1,7 @@
-import { kindeAuthClient } from "$lib/KindeSDK.js";
-import { kindeConfiguration } from "$lib/index.js";
-import { sessionStorage } from "$lib/sessionStorage/sessionStorage.js";
-import { parseSearchParamsToObject } from "$lib/utils/index.js";
+import { kindeAuthClient } from "#lib/KindeSDK.js";
+import { kindeConfiguration } from "#lib/index.js";
+import { sessionStorage } from "#lib/sessionStorage/sessionStorage.js";
+import { parseSearchParamsToObject } from "#lib/utils/index.js";
 import {
   type SessionManager,
   validateClientSecret,
@@ -88,14 +88,16 @@ export async function handleAuth({
         new URL(request.url),
       );
       await redirectToPostLoginUrl();
-      throw redirect(302, kindeConfiguration.loginRedirectURL || "/");
+      throw redirect(302, kindeConfiguration.loginRedirectURL || "/", {
+        external: true,
+      });
     case "logout":
       url = await kindeAuthClient.logout(request as unknown as SessionManager);
       break;
     default:
       return error(404, "Not Found");
   }
-  throw redirect(302, url.toString());
+  throw redirect(302, url.toString(), { external: true });
 }
 
 const switchOrgHandler = async (
@@ -136,7 +138,7 @@ const openPortal = async (
     console.log("err:", err);
     throw error(500, "Failed to generate portal URL");
   }
-  throw redirect(302, portalUrl.url.toString());
+  throw redirect(302, portalUrl.url.toString(), { external: true });
 };
 
 const storePostLoginRedirectUrl = (
@@ -172,7 +174,9 @@ const redirectToPostLoginUrl = async () => {
     if (target.origin !== appBaseUrl.origin) {
       return;
     }
-    throw redirect(302, target.toString());
+    throw redirect(302, target.toString(), { external: [appBaseUrl.origin] });
   }
-  throw redirect(302, new URL(post_login_redirect_url, appBaseUrl).toString());
+  throw redirect(302, new URL(post_login_redirect_url, appBaseUrl).toString(), {
+    external: [appBaseUrl.origin],
+  });
 };

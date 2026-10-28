@@ -4,7 +4,7 @@ const { sessionHooksMock } = vi.hoisted(() => ({
   sessionHooksMock: vi.fn(),
 }));
 
-vi.mock("$lib/index.js", () => ({
+vi.mock("#lib/index.js", () => ({
   sessionHooks: sessionHooksMock,
 }));
 
