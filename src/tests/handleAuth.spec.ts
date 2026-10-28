@@ -1,8 +1,8 @@
 // file deepcode ignore HardcodedNonCryptoSecret/test: <test file>
 import { describe, beforeEach, it, expect, vi } from "vitest";
-import { kindeAuthClient, kindeConfiguration, handleAuth } from "$lib/index.js";
+import { kindeAuthClient, kindeConfiguration, handleAuth } from "#lib/index.js";
 
-vi.mock("$lib/sessionStorage/sessionStorage.js");
+vi.mock("#lib/sessionStorage/sessionStorage.js");
 vi.mock("@kinde/js-utils", async () => {
   const originalModule = await vi.importActual("@kinde/js-utils");
   return {
@@ -10,8 +10,8 @@ vi.mock("@kinde/js-utils", async () => {
     switchOrg: vi.fn(),
   };
 });
-vi.mock("$lib/index.js", async () => {
-  const originalModule = await vi.importActual("$lib/index.js");
+vi.mock("#lib/index.js", async () => {
+  const originalModule = await vi.importActual("#lib/index.js");
 
   const kindeConfiguration = {
     authDomain: "https://testdomain.kinde.com",

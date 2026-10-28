@@ -1,9 +1,9 @@
 // file deepcode ignore HardcodedNonCryptoSecret/test: <test file>
 import { describe, it, expect, afterEach, vi } from "vitest";
-import * as kindeSDK from "$lib/KindeSDK.js";
+import * as kindeSDK from "#lib/KindeSDK.js";
 import { Configuration } from "@kinde-oss/kinde-typescript-sdk";
 
-vi.mock("$lib/config/index.js", () => ({
+vi.mock("#lib/config/index.js", () => ({
   kindeConfiguration: {
     authDomain: "https://testdomain.kinde.com",
     logoutRedirectURL: "http://localhost:3000",

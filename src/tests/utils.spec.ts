@@ -1,4 +1,4 @@
-import { parseSearchParamsToObject, pick, omit } from "$lib/utils/index.js";
+import { parseSearchParamsToObject, pick, omit } from "#lib/utils/index.js";
 import { describe, it, expect } from "vitest";
 
 describe("Utils", () => {

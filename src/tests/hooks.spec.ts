@@ -1,4 +1,4 @@
-import { sessionHooks } from "$lib/index.js";
+import { sessionHooks } from "#lib/index.js";
 import { describe, it, expect, vi, afterEach } from "vitest";
 
 describe("sessionHooks", () => {

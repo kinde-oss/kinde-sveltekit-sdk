@@ -1,4 +1,4 @@
-import { sessionHooks, type Handler } from "$lib/index.js";
+import { sessionHooks, type Handler } from "#lib/index.js";
 import { redirect } from "@sveltejs/kit";
 
 const AUTH_API_PREFIX = "/api/auth/";
